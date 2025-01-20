@@ -1,4 +1,4 @@
-# Next.js OneRoster Integration System Requirements
+# Next.js Question & Test Interoperability Integration System Requirements
 
 ## Summary
 
@@ -50,7 +50,7 @@ The project MUST include the following files and adhere to their defined structu
 
    ```json
    {
-     "name": "oneroster-nextjs-app",
+     "name": "qti-nextjs-app",
      "version": "0.1.0",
      "private": true,
      "scripts": {
@@ -98,7 +98,7 @@ The project MUST include the following files and adhere to their defined structu
      ) {
        const { path } = req.query;
        const apiPath = Array.isArray(path) ? path.join("/") : path;
-       const baseUrl = process.env.NEXT_PUBLIC_ONEROSTER_BASE_URL;
+       const baseUrl = process.env.NEXT_PUBLIC_QTI_BASE_URL;
 
        try {
          const response = await fetch(`${baseUrl}/${apiPath}`, {
