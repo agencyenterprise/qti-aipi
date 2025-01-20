@@ -16,8 +16,7 @@ The objective is to build a fully functional, deployable Next.js application int
     ```bash
     npm install && npm run build && npm run start
     ```
-  - CRITICAL: GET endpoints: MUST reference the correct endpoint for gradebookservice.yaml, rostersservice.yaml, or resourceservice.yaml
-  - CRITICAL: POST/PUT/DELETE endpoints: MUST reference diff_doc.yaml
+  - CRITICAL: endpoints: MUST reference qti-api.yaml
   - Always rely on the API server for error handling. Do not generate custom error codes; instead, accept and process the error responses as returned by the API.
   - When updating the app, always check the entire codebase.
 
@@ -28,8 +27,9 @@ The objective is to build a fully functional, deployable Next.js application int
 1. You MUST read and follow ALL patterns and examples provided in this document.
 2. You MUST NOT create your own patterns or "improve" existing ones.
 3. Validate each code block against the patterns shown in this document.
-4. EVERY response MUST start by checking compliance with these rules.
-5. If a pattern exists in these rules, you MUST use it verbatim.
+4. Validate data schemas with their qti-api.yaml file.
+5. EVERY response MUST start by checking compliance with these rules.
+6. If a pattern exists in these rules, you MUST use it verbatim.
 
 ---
 
@@ -60,20 +60,24 @@ The project MUST include the following files and adhere to their defined structu
        "lint": "next lint"
      },
      "dependencies": {
-       "@types/node": "18.11.9",
-       "@types/react": "18.0.25",
-       "@types/react-dom": "18.0.9",
+
        "next": "13.4.19",
        "react": "18.2.0",
        "react-dom": "18.2.0",
        "typescript": "5.0.4",
        "tailwindcss": "3.3.0",
        "autoprefixer": "10.4.14",
-       "postcss": "8.4.21"
+       "postcss": "8.4.21",
+       "axios": "1.6.2"
      },
      "devDependencies": {
        "eslint": "8.27.0",
-       "eslint-config-next": "13.4.19"
+       "eslint-config-next": "13.4.19",
+       "@types/axios": "0.14.0",
+       "@types/node": "18.11.9",
+       "@types/react": "18.0.25",
+       "@types/react-dom": "18.0.9"
+
      }
    }
    ```
@@ -82,7 +86,7 @@ The project MUST include the following files and adhere to their defined structu
 
    - Store in `.env`:
      ```bash
-     NEXT_PUBLIC_QTI_BASE_URL=localhost:3000
+     NEXT_PUBLIC_QTI_BASE_URL=localhost:3000/api
      ```
 
 3. **Proxy Handler for API Integration:**
@@ -101,16 +105,9 @@ The project MUST include the following files and adhere to their defined structu
        const baseUrl = process.env.NEXT_PUBLIC_QTI_BASE_URL;
 
        try {
-         const response = await fetch(`${baseUrl}/${apiPath}`, {
-           method: req.method,
-           headers: {
-             "Content-Type": "application/json",
-           },
-           body: req.method !== "GET" ? JSON.stringify(req.body) : undefined,
-         });
+         const response = await axios.get(`${baseUrl}/${apiPath}`);
 
-         const data = await response.json();
-         res.status(response.status).json(data);
+         res.status(response.status).json(response.data);
        } catch (error) {
          res.status(500).json({ error: "Failed to fetch data" });
        }
@@ -125,9 +122,8 @@ The project MUST include the following files and adhere to their defined structu
      const BASE_PATH = "/api/proxy";
 
      export async function fetchStudents() {
-       const response = await fetch(
-         `${BASE_PATH}`
-       );
+       const response = await axios.get(`${BASE_PATH}`);
+
        if (!response.ok) throw new Error("Failed to fetch students");
        return response.json();
      }
@@ -157,7 +153,7 @@ The project MUST include the following files and adhere to their defined structu
      import { fetchQuestions } from "../lib/api";
 
      export default function QuestionList() {
-       const { data, error } = useSWR("questions", fetchQuestions);
+       const { data, error } = fetchQuestions();
        // ... rest of the component
      }
      ```
@@ -174,8 +170,6 @@ The project MUST include the following files and adhere to their defined structu
   - Ensure all client-side calls use the proxy.
 
 ---
-
-
 
 ## UI Libraries and Component Guidelines
 
