@@ -250,3 +250,24 @@ export interface QTIFeedback {
   showHide: 'show' | 'hide';
   outcomeIdentifier: string;
 }
+
+export interface QTIPackage {
+  id: string;
+  name: string;
+  uploadDate: Date;
+  items: QTIItem[];
+}
+
+export interface QTIItem {
+  id: string;
+  title: string;
+  type: 'multiple-choice' | 'essay' | 'matching' | 'true-false';
+  content: string;
+  metadata?: Record<string, unknown>;
+}
+
+export interface QTIUploadResponse {
+  success: boolean;
+  package?: QTIPackage;
+  error?: string;
+}
