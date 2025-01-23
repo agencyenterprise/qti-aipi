@@ -84,6 +84,8 @@ important_files: [
 "qti-api.yaml",
 "qti-aipi/src/components/qti-editor.tsx",
 "qti-aipi/src/types/index.ts",
+"qti-aipi/src/components/question-types/index.ts",
+"qti-aipi/src/components/editors/index.ts",
 "qti-aipi/src/App.tsx"
 ]
 

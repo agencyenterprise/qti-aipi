@@ -2,9 +2,8 @@
 
 import { useCallback, useRef, useReducer } from 'react';
 import {
+  QTISection,
   QTITestPart,
-  QTIHotspot,
-  CommonAttributes,
   ItemSessionControl,
   TimeLimits,
   QTIAssessmentTest
@@ -13,7 +12,7 @@ import {
   CommonAttributesEditor, 
   ItemSessionControlEditor, 
   TimeLimitsEditor,
-  TestPartEditor
+  SectionEditor
 } from './editors';
 
 interface ExtendedQTIAssessmentItem extends QTIAssessmentTest {
@@ -83,196 +82,151 @@ export default function QTIEditor({ initialData, onSave }: QTIEditorProps) {
     [state.isSubmitting, state.assessment, onSave]
   );
 
-  const handleAttributesChange = useCallback((updates: Partial<CommonAttributes>) => {
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { ...state.assessment, ...updates } 
-    });
-  }, [state.assessment]);
-
-  const handleTestPartUpdate = useCallback((testPartIndex: number, updates: Partial<QTITestPart>) => {
-    if (!state.assessment.testParts) return;
-    
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: {
-        testParts: state.assessment.testParts.map((part, idx) => 
-          idx === testPartIndex ? { ...part, ...updates } : part
-        )
-      } 
-    });
-  }, [state.assessment.testParts]);
-
-  const handleItemSessionControlChange = useCallback((updates: ItemSessionControl) => {
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { ...state.assessment, itemSessionControl: updates } 
-    });
-  }, [state.assessment]);
-
-  const handleTimeLimitsChange = useCallback((updates: TimeLimits) => {
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { ...state.assessment, timeLimits: updates } 
-    });
-  }, [state.assessment]);
-
-  const addChoice = (questionIndex: number) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const choices = updatedQuestions[questionIndex].choices || [];
-    choices.push({
-      identifier: `C${choices.length + 1}`,
-      value: ''
-    });
-    updatedQuestions[questionIndex].choices = choices;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const updateChoice = (questionIndex: number, choiceIndex: number, value: string) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const choices = [...(updatedQuestions[questionIndex].choices || [])];
-    choices[choiceIndex] = { ...choices[choiceIndex], value };
-    updatedQuestions[questionIndex].choices = choices;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const addOrderItem = (questionIndex: number) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const orderItems = updatedQuestions[questionIndex].orderItems || [];
-    orderItems.push('');
-    updatedQuestions[questionIndex].orderItems = orderItems;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const updateOrderItem = (questionIndex: number, itemIndex: number, value: string) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const orderItems = [...(updatedQuestions[questionIndex].orderItems || [])];
-    orderItems[itemIndex] = value;
-    updatedQuestions[questionIndex].orderItems = orderItems;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const addMatchItem = (questionIndex: number, type: 'source' | 'target') => {
-    const updatedQuestions = [...state.assessment.questions];
-    const matchItems = updatedQuestions[questionIndex].matchItems || { source: [], target: [] };
-    const items = matchItems[type];
-    items.push({
-      identifier: `${type[0].toUpperCase()}${items.length + 1}`,
-      value: ''
-    });
-    updatedQuestions[questionIndex].matchItems = matchItems;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const updateMatchItem = (questionIndex: number, type: 'source' | 'target', itemIndex: number, value: string) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const matchItems = { ...(updatedQuestions[questionIndex].matchItems || { source: [], target: [] }) };
-    const items = [...matchItems[type]];
-    items[itemIndex] = { ...items[itemIndex], value };
-    matchItems[type] = items;
-    updatedQuestions[questionIndex].matchItems = matchItems;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const addHotspot = (questionIndex: number) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const hotspots = updatedQuestions[questionIndex].hotspots || [];
-    hotspots.push({
-      identifier: `H${hotspots.length + 1}`,
-      shape: 'rect',
-      coords: '0,0,100,100',
-    });
-    updatedQuestions[questionIndex].hotspots = hotspots;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const updateHotspot = (questionIndex: number, hotspotIndex: number, updates: Partial<QTIHotspot>) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const hotspots = [...(updatedQuestions[questionIndex].hotspots || [])];
-    hotspots[hotspotIndex] = { ...hotspots[hotspotIndex], ...updates };
-    updatedQuestions[questionIndex].hotspots = hotspots;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const addGapText = (questionIndex: number) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const gapTexts = updatedQuestions[questionIndex].gapTexts || [];
-    gapTexts.push({
-      identifier: `G${gapTexts.length + 1}`,
-      value: ''
-    });
-    updatedQuestions[questionIndex].gapTexts = gapTexts;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
-  const updateGapText = (questionIndex: number, gapIndex: number, value: string) => {
-    const updatedQuestions = [...state.assessment.questions];
-    const gapTexts = [...(updatedQuestions[questionIndex].gapTexts || [])];
-    gapTexts[gapIndex] = { ...gapTexts[gapIndex], value };
-    updatedQuestions[questionIndex].gapTexts = gapTexts;
-    dispatch({ 
-      type: 'UPDATE_ASSESSMENT', 
-      payload: { questions: updatedQuestions } 
-    });
-  };
-
   return (
     <div className="p-4 text-black">
       <form ref={formRef} onSubmit={handleSubmit}>
         <CommonAttributesEditor
           attributes={state.assessment}
-          onChange={handleAttributesChange}
+          onChange={(updates) => dispatch({ type: 'UPDATE_ASSESSMENT', payload: updates })}
         />
+
+        <div className="mb-4">
+          <h3 className="font-bold mb-2 text-black">Item Session Control</h3>
+          <ItemSessionControlEditor
+            control={state.assessment.itemSessionControl}
+            onChange={(updates) => dispatch({ type: 'UPDATE_ASSESSMENT', payload: { itemSessionControl: updates } })}
+          />
+        </div>
+
+        <div className="mb-4">
+          <h3 className="font-bold mb-2 text-black">Time Limits</h3>
+          <TimeLimitsEditor
+            limits={state.assessment.timeLimits}
+            onChange={(updates) => dispatch({ type: 'UPDATE_ASSESSMENT', payload: { timeLimits: updates } })}
+          />
+        </div>
+
+        <div className="mb-4">
+          <h3 className="font-bold mb-2 text-black">Pre-conditions</h3>
+          <textarea
+            value={state.assessment.preConditions?.join('\n') || ''}
+            onChange={(e) => dispatch({ type: 'UPDATE_ASSESSMENT', payload: { preConditions: e.target.value.split('\n') } })}
+            className="w-full p-1 border mt-1 text-black"
+            rows={3}
+            placeholder="Enter one pre-condition per line"
+          />
+        </div>
+
         <div className="mb-4">
           <h3 className="font-bold mb-2 text-black">Test Parts</h3>
           {state.assessment.testParts?.map((testPart: QTITestPart, testPartIndex: number) => (
-            <TestPartEditor
-              key={testPart.identifier}
-              testPart={testPart}
-              testPartIndex={testPartIndex}
-              onUpdate={handleTestPartUpdate}
-              updateChoice={updateChoice}
-              addChoice={addChoice}
-              updateOrderItem={updateOrderItem}
-              addOrderItem={addOrderItem}
-              updateMatchItem={updateMatchItem}
-              addMatchItem={addMatchItem}
-              updateGapText={updateGapText}
-              addGapText={addGapText}
-              updateHotspot={updateHotspot}
-              addHotspot={addHotspot}
-              state={state}
-              dispatch={dispatch}
-            />
+            <div key={testPart.identifier} className="border p-4 mb-4">
+              <div className="flex justify-between items-center mb-4">
+                <h4 className="text-lg font-bold text-black">Test Part: {testPart.title || testPart.identifier}</h4>
+              </div>
+
+              <CommonAttributesEditor
+                attributes={testPart}
+                onChange={(updates) => {
+                  const updatedTestParts = [...(state.assessment.testParts || [])];
+                  updatedTestParts[testPartIndex] = { ...testPart, ...updates };
+                  dispatch({ type: 'UPDATE_ASSESSMENT', payload: { testParts: updatedTestParts } });
+                }}
+              />
+
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="text-black">Navigation Mode</label>
+                  <select
+                    value={testPart.navigationMode}
+                    onChange={(e) => {
+                      const updatedTestParts = [...(state.assessment.testParts || [])];
+                      updatedTestParts[testPartIndex] = {
+                        ...testPart,
+                        navigationMode: e.target.value as 'linear' | 'nonlinear'
+                      };
+                      dispatch({ type: 'UPDATE_ASSESSMENT', payload: { testParts: updatedTestParts } });
+                    }}
+                    className="w-full p-1 border mt-1 text-black"
+                  >
+                    <option value="linear">Linear</option>
+                    <option value="nonlinear">Non-linear</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-black">Submission Mode</label>
+                  <select
+                    value={testPart.submissionMode}
+                    onChange={(e) => {
+                      const updatedTestParts = [...(state.assessment.testParts || [])];
+                      updatedTestParts[testPartIndex] = {
+                        ...testPart,
+                        submissionMode: e.target.value as 'individual' | 'simultaneous'
+                      };
+                      dispatch({ type: 'UPDATE_ASSESSMENT', payload: { testParts: updatedTestParts } });
+                    }}
+                    className="w-full p-1 border mt-1 text-black"
+                  >
+                    <option value="individual">Individual</option>
+                    <option value="simultaneous">Simultaneous</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <h4 className="font-bold mb-2 text-black">Sections</h4>
+                {testPart.sections?.map((section, sectionIndex) => (
+                  <SectionEditor
+                    key={section.identifier}
+                    section={section}
+                    onUpdate={(updates) => {
+                      const updatedTestParts = [...(state.assessment.testParts || [])];
+                      const updatedSections = [...testPart.sections];
+                      updatedSections[sectionIndex] = { ...section, ...updates };
+                      updatedTestParts[testPartIndex] = {
+                        ...testPart,
+                        sections: updatedSections
+                      };
+                      dispatch({ type: 'UPDATE_ASSESSMENT', payload: { testParts: updatedTestParts } });
+                    }}
+                    onDelete={() => {
+                      const updatedTestParts = [...(state.assessment.testParts || [])];
+                      const updatedSections = [...testPart.sections];
+                      updatedSections.splice(sectionIndex, 1);
+                      updatedTestParts[testPartIndex] = {
+                        ...testPart,
+                        sections: updatedSections
+                      };
+                      dispatch({ type: 'UPDATE_ASSESSMENT', payload: { testParts: updatedTestParts } });
+                    }}
+                  />
+                ))}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const updatedTestParts = [...(state.assessment.testParts || [])];
+                    const newSection: QTISection = {
+                      identifier: `section_${Date.now()}`,
+                      title: 'New Section',
+                      visible: 'true',
+                      sections: [],
+                      items: []
+                    };
+                    updatedTestParts[testPartIndex] = {
+                      ...testPart,
+                      sections: [...(testPart.sections || []), newSection]
+                    };
+                    dispatch({ type: 'UPDATE_ASSESSMENT', payload: { testParts: updatedTestParts } });
+                  }}
+                  className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                >
+                  Add Section
+                </button>
+              </div>
+            </div>
           ))}
           <button
+            type="button"
             onClick={() => {
               const newTestPart: QTITestPart = {
                 identifier: `testpart_${Date.now()}`,
@@ -283,9 +237,7 @@ export default function QTIEditor({ initialData, onSave }: QTIEditorProps) {
               };
               dispatch({ 
                 type: 'UPDATE_ASSESSMENT', 
-                payload: {
-                  testParts: [...(state.assessment.testParts || []), newTestPart]
-                } 
+                payload: { testParts: [...(state.assessment.testParts || []), newTestPart] } 
               });
             }}
             className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
@@ -293,33 +245,7 @@ export default function QTIEditor({ initialData, onSave }: QTIEditorProps) {
             Add Test Part
           </button>
         </div>
-        <div className="mb-4">
-          <h3 className="font-bold mb-2 text-black">Item Session Control</h3>
-          <ItemSessionControlEditor
-            control={state.assessment.itemSessionControl}
-            onChange={(updates) => handleItemSessionControlChange(updates)}
-          />
-        </div>
-        <div className="mb-4">
-          <h3 className="font-bold mb-2 text-black">Time Limits</h3>
-          <TimeLimitsEditor
-            limits={state.assessment.timeLimits}
-            onChange={(updates) => handleTimeLimitsChange(updates)}
-          />
-        </div>
-        <div className="mb-4">
-          <h3 className="font-bold mb-2 text-black">Pre-conditions</h3>
-          <textarea
-            value={state.assessment.preConditions?.join('\n') || ''}
-            onChange={(e) => dispatch({ 
-              type: 'UPDATE_ASSESSMENT', 
-              payload: { preConditions: e.target.value.split('\n') } 
-            })}
-            className="w-full p-1 border mt-1 text-black"
-            rows={3}
-            placeholder="Enter one pre-condition per line"
-          />
-        </div>
+
         <button
           type="submit"
           disabled={state.isSubmitting}
