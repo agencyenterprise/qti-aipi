@@ -1,226 +1,104 @@
-# Next.js Question & Test Interoperability Integration System Requirements
+# QTI Assessment System Project Structure
 
-## Summary
+# This project consists of two main parts:
 
-The objective is to build a fully functional, deployable Next.js application integrated with the Question & Test Interoperability API. **All responses must adhere to the following requirements**, including the generation of a complete `package.json` file as the first item in every response. Every code snippet must comply with the provided patterns, file setups, and project structure.
+# 1. QTI API (OpenAPI/Swagger specification)
 
----
+# 2. QTI AIPI (React+TypeScript frontend application)
 
-## CRITICAL REQUIREMENTS
+# Core API Specification
 
-- **`package.json` file:**
-  - MUST be included first in EVERY response.
-  - MUST use specific versions for core dependencies (React, Next.js) as shown in the example below.
-  - Use `"latest"` only for utility packages that do not have direct React version dependencies.
-  - The app MUST build and run with the following commands:
-    ```bash
-    npm install && npm run build && npm run start
-    ```
-  - CRITICAL: endpoints: MUST reference qti-api.yaml
-  - Always rely on the API server for error handling. Do not generate custom error codes; instead, accept and process the error responses as returned by the API.
-  - When updating the app, always check the entire codebase.
+qti-api.yaml {
+description: "OpenAPI/Swagger specification for the QTI Assessment Engine API"
+type: "api-spec"
+importance: "high"
+}
 
----
+# Frontend Application (qti-aipi)
 
-## AI ASSISTANT RULES
+qti-aipi/ {
+description: "React+TypeScript frontend application for QTI assessment authoring"
+type: "frontend"
+framework: "react"
+language: "typescript"
 
-1. You MUST read and follow ALL patterns and examples provided in this document.
-2. You MUST NOT create your own patterns or "improve" existing ones.
-3. Validate each code block against the patterns shown in this document.
-4. Validate data schemas with their qti-api.yaml file.
-5. EVERY response MUST start by checking compliance with these rules.
-6. If a pattern exists in these rules, you MUST use it verbatim.
+# Core Application Files
 
----
+src/ {
+components/ {
+description: "React components for the application"
+qti-editor.tsx: "Main QTI assessment editor component"
+}
 
-## Environment and Framework Requirements
-
-- **Framework:** Next.js (v13+) with React 18.x.
-- **Environment:** Node.js v20 is assumed.
-
----
-
-## Project Structure
-
-### Required Files
-
-The project MUST include the following files and adhere to their defined structure:
-
-1. **`package.json`:**
-
-   ```json
-   {
-     "name": "qti-nextjs-app",
-     "version": "0.1.0",
-     "private": true,
-     "scripts": {
-       "dev": "next dev",
-       "build": "next build",
-       "start": "next start",
-       "lint": "next lint"
-     },
-     "dependencies": {
-
-       "next": "13.4.19",
-       "react": "18.2.0",
-       "react-dom": "18.2.0",
-       "typescript": "5.0.4",
-       "tailwindcss": "3.3.0",
-       "autoprefixer": "10.4.14",
-       "postcss": "8.4.21",
-       "axios": "1.6.2"
-     },
-     "devDependencies": {
-       "eslint": "8.27.0",
-       "eslint-config-next": "13.4.19",
-       "@types/axios": "0.14.0",
-       "@types/node": "18.11.9",
-       "@types/react": "18.0.25",
-       "@types/react-dom": "18.0.9"
-
-     }
-   }
-   ```
-
-2. **API Base URL Configuration:**
-
-   - Store in `.env`:
-     ```bash
-     NEXT_PUBLIC_QTI_BASE_URL=localhost:3000/api
-     ```
-
-3. **Proxy Handler for API Integration:**
-
-   - File: `pages/api/proxy/[...path].ts`
-
-     ```typescript
-     import type { NextApiRequest, NextApiResponse } from "next";
-
-     export default async function handler(
-       req: NextApiRequest,
-       res: NextApiResponse
-     ) {
-       const { path } = req.query;
-       const apiPath = Array.isArray(path) ? path.join("/") : path;
-       const baseUrl = process.env.NEXT_PUBLIC_QTI_BASE_URL;
-
-       try {
-         const response = await axios.get(`${baseUrl}/${apiPath}`);
-
-         res.status(response.status).json(response.data);
-       } catch (error) {
-         res.status(500).json({ error: "Failed to fetch data" });
-       }
-     }
-     ```
-
-4. **API Client Implementation:**
-
-   - File: `lib/api.ts`
-
-     ```typescript
-     const BASE_PATH = "/api/proxy";
-
-     export async function fetchStudents() {
-       const response = await axios.get(`${BASE_PATH}`);
-
-       if (!response.ok) throw new Error("Failed to fetch students");
-       return response.json();
-     }
-     ```
-
-5. **TypeScript Requirements:**
-
-   - ALL components, functions, and hooks MUST include explicit type definitions.
-   - Example pattern:
-
-     ```typescript
-     interface Props {
-       title: string;
-       items: Item[];
-     }
-
-     export function Component({ title, items }: Props): JSX.Element {
-       // ...
-     }
-     ```
-
-6. **Component Usage Example:**
-
-   - File: `components/QuestionList.tsx`
-
-     ```typescript
-     import { fetchQuestions } from "../lib/api";
-
-     export default function QuestionList() {
-       const { data, error } = fetchQuestions();
-       // ... rest of the component
-     }
-     ```
-
----
-
-## API Integration and Proxy Requirements
-
-### Proxy Setup
-
-- Proxy MUST:
-  - Be located in `pages/api/proxy/[...path].ts`.
-  - Forward requests to the QTI API.
-  - Ensure all client-side calls use the proxy.
-
----
-
-## UI Libraries and Component Guidelines
-
-- Use Tailwind CSS for styling and accessibility:
-
-  ```json
-  {
-    "dependencies": {
-      "tailwindcss": "3.3.0",
-      "@headlessui/react": "1.7.17"
+    types/ {
+      description: "TypeScript type definitions"
+      index.ts: "Core QTI types and interfaces"
     }
-  }
-  ```
 
-- Example Component:
-  ```tsx
-  export function DataTable({ items }: { items: Item[] }) {
-    return (
-      <div
-        role="table"
-        aria-label="Data Table"
-        className="w-full divide-y divide-gray-200 rounded-lg shadow-sm"
-      >
-        <div role="rowgroup" className="bg-gray-50">
-          {/* Header */}
-        </div>
-        <div role="rowgroup">
-          {items.map((item) => (
-            <div
-              key={item.id}
-              role="row"
-              className="grid grid-cols-3 gap-4 px-4 py-3 hover:bg-gray-50 focus-within:bg-gray-50"
-              tabIndex={0}
-            >
-              {/* Row Content */}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-  ```
+    App.tsx: "Root application component"
+    main.tsx: "Application entry point"
 
----
+}
 
-## Deployment Verification
+# Configuration Files
 
-- Validate functionality at `http://localhost:3000`.
-- Ensure compatibility with standard npm commands:
-  ```bash
-  npm install && npm run build && npm run start
-  ```
+package.json: "Project dependencies and scripts"
+tsconfig.json: "TypeScript configuration"
+tsconfig.app.json: "App-specific TypeScript config"
+tsconfig.node.json: "Node-specific TypeScript config"
+vite.config.ts: "Vite bundler configuration"
+}
 
----
+# Project Context
+
+context {
+description: "QTI Assessment System"
+purpose: "Create and manage educational assessments following QTI standards"
+features: [
+"Assessment authoring",
+"Question management",
+"Test assembly",
+"QTI XML generation"
+]
+mainComponents: [
+"REST API for assessment management",
+"React-based assessment editor"
+]
+}
+
+# Build Instructions
+
+build {
+api: "OpenAPI/Swagger specification - no build required"
+frontend: {
+install: "npm install"
+dev: "npm run dev"
+build: "npm run build"
+lint: "npm run lint"
+}
+}
+
+# Key Files for Development
+
+important_files: [
+"qti-api.yaml",
+"qti-aipi/src/components/qti-editor.tsx",
+"qti-aipi/src/types/index.ts",
+"qti-aipi/src/App.tsx"
+]
+
+# Development Guidelines
+
+guidelines {
+api: [
+"Follow OpenAPI 3.0.0 specification",
+"Maintain RESTful principles",
+"Include comprehensive documentation"
+]
+frontend: [
+"Use TypeScript for type safety",
+"Follow React best practices",
+"Maintain component reusability",
+"Ensure accessibility compliance"
+]
+}
