@@ -9,7 +9,7 @@ export * from './template-default';
 export * from './assessment-item';
 export * from './stylesheet';
 export * from './question';
-export * from './choice';
+export * from './choice-interaction';
 export * from './hotspot';
 export * from './response-mapping';
 export * from './area-mapping';

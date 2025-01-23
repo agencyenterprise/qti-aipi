@@ -12,7 +12,6 @@ export { DrawingInteraction } from './qti-drawing-interaction';
 export { UploadInteraction } from './qti-upload-interaction';
 export { AssociateInteraction } from './qti-associate-interaction';
 export { CustomInteraction } from './qti-custom-interaction';
-export { EndAttemptInteraction } from './qti-end-attempt-interaction';
 export { GraphicAssociateInteraction } from './qti-graphic-associate-interaction';
 export { GraphicOrderInteraction } from './qti-graphic-order-interaction';
 export { PositionObjectInteraction } from './qti-position-object-interaction';

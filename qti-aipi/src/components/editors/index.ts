@@ -1,6 +1,5 @@
-export { CommonAttributesEditor } from './CommonAttributesEditor';
-export { ItemSessionControlEditor } from './ItemSessionControlEditor';
-export { TimeLimitsEditor } from './TimeLimitsEditor';
-export { TestPartEditor } from './TestPartEditor';
-export { SectionEditor } from './SectionEditor';
-export { QuestionEditor } from './QuestionEditor'; 
+export { CommonAttributesEditor } from './qti-common-attributes-editor';
+export { ItemSessionControlEditor } from './qti-item-session-controller-editor';
+export { TimeLimitsEditor } from './qti-time-limits-editor';
+export { TestPartEditor } from './qti-test-part-editor';
+export { SectionEditor } from './qti-section-editor'; 

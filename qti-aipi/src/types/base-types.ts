@@ -14,11 +14,18 @@ export type QuestionType =
   | 'orderInteraction'
   | 'matchInteraction'
   | 'inlineChoiceInteraction'
-  | 'uploadInteraction'
   | 'gapMatchInteraction'
   | 'hotspotInteraction'
   | 'graphicGapMatchInteraction'
   | 'sliderInteraction'
-  | 'drawingInteraction';
+  | 'drawingInteraction'
+  | 'uploadInteraction'
+  | 'associateInteraction'
+  | 'customInteraction'
+  | 'endAttemptInteraction'
+  | 'graphicAssociateInteraction'
+  | 'graphicOrderInteraction'
+  | 'positionObjectInteraction'
+  | 'selectPointInteraction';
 export type DrawingTool = 'pen' | 'eraser' | 'shapes';
 

@@ -1,5 +1,8 @@
+import React from 'react';
 import { QTIQuestion, QTIHotspot } from '../../types';
 import { Dispatch } from 'react';
+import { BasePromptInteraction } from './qti-base-prompt-interaction';
+import { BasePromptInteractionType } from '../../types/base-prompt-interaction';
 
 interface State {
   assessment: {
@@ -11,6 +14,13 @@ interface State {
 interface Action {
   type: 'UPDATE_ASSESSMENT' | 'START_SUBMISSION' | 'END_SUBMISSION';
   payload?: Partial<State['assessment']>;
+}
+
+interface BaseAction {
+  type: 'UPDATE_ASSESSMENT';
+  payload: {
+    questions: BasePromptInteractionType[];
+  };
 }
 
 interface GraphicAssociateInteractionProps {
@@ -29,41 +39,91 @@ export const GraphicAssociateInteraction = ({
   updateQuestion,
   updateHotspot,
   addHotspot,
+  state,
+  dispatch
 }: GraphicAssociateInteractionProps) => {
+  // Create a base prompt interaction object from the question
+  const baseInteraction: BasePromptInteractionType = {
+    id: question.identifier,
+    responseIdentifier: question.responseIdentifier || '',
+    qtiPrompt: question.prompt
+  };
+
+  // Create a handler to update base interaction fields
+  const handleBaseInteractionUpdate = (
+    index: number,
+    field: keyof BasePromptInteractionType,
+    value: string | number | boolean | { [key: string]: string }
+  ) => {
+    // Map base interaction fields back to question fields
+    switch (field) {
+      case 'id':
+        updateQuestion(index, 'identifier', value as string);
+        break;
+      case 'qtiPrompt':
+        updateQuestion(index, 'prompt', value as string);
+        break;
+      case 'responseIdentifier':
+        updateQuestion(index, 'responseIdentifier', value as string);
+        break;
+    }
+  };
+
+  // Create a handler to map the dispatch for base interaction
+  const handleBaseDispatch = (action: BaseAction) => {
+    if (action.type === 'UPDATE_ASSESSMENT') {
+      const updatedQuestions = [...state.assessment.questions];
+      const baseQuestion = action.payload.questions[qIndex];
+      updatedQuestions[qIndex] = {
+        ...updatedQuestions[qIndex],
+        identifier: baseQuestion.id || updatedQuestions[qIndex].identifier,
+        responseIdentifier: baseQuestion.responseIdentifier,
+        prompt: baseQuestion.qtiPrompt || updatedQuestions[qIndex].prompt
+      };
+      dispatch({
+        type: 'UPDATE_ASSESSMENT',
+        payload: { questions: updatedQuestions }
+      });
+    }
+  };
+
   return (
     <div className="mb-4">
+      {/* Base Prompt Interaction Fields */}
+      <BasePromptInteraction
+        interaction={baseInteraction}
+        index={qIndex}
+        updateInteraction={handleBaseInteractionUpdate}
+        state={{ assessment: { questions: state.assessment.questions.map(q => ({
+          id: q.identifier,
+          responseIdentifier: q.responseIdentifier || '',
+          qtiPrompt: q.prompt
+        })) } }}
+        dispatch={handleBaseDispatch}
+      />
+
+      {/* Graphic Associate Specific Fields */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="text-black">Response Identifier</label>
-          <input
-            type="text"
-            value={question.responseIdentifier || ''}
-            onChange={(e) => updateQuestion(qIndex, 'responseIdentifier', e.target.value)}
-            className="w-full p-1 border mt-1 text-black"
-            placeholder="Required: Enter response identifier"
-          />
-        </div>
-        <div>
-          <label className="text-black">Max Associations</label>
-          <input
-            type="number"
-            value={question.maxAssociations || ''}
-            onChange={(e) => updateQuestion(qIndex, 'maxAssociations', e.target.value ? Number(e.target.value) : undefined)}
-            className="w-full p-1 border mt-1 text-black"
-            min="0"
-            placeholder="Maximum number of associations"
-          />
-        </div>
-        <div>
-          <label className="text-black">Min Associations</label>
-          <input
-            type="number"
-            value={question.minAssociations || ''}
-            onChange={(e) => updateQuestion(qIndex, 'minAssociations', e.target.value ? Number(e.target.value) : undefined)}
-            className="w-full p-1 border mt-1 text-black"
-            min="0"
-            placeholder="Minimum number of associations"
-          />
+          <label className="text-black">Associations</label>
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="number"
+              value={question.minAssociations || ''}
+              onChange={(e) => updateQuestion(qIndex, 'minAssociations', e.target.value ? Number(e.target.value) : undefined)}
+              className="w-full p-1 border mt-1 text-black"
+              min="0"
+              placeholder="Min associations"
+            />
+            <input
+              type="number"
+              value={question.maxAssociations || '1'}
+              onChange={(e) => updateQuestion(qIndex, 'maxAssociations', e.target.value ? Number(e.target.value) : undefined)}
+              className="w-full p-1 border mt-1 text-black"
+              min="0"
+              placeholder="Max associations (default: 1)"
+            />
+          </div>
         </div>
       </div>
 
@@ -128,10 +188,13 @@ export const GraphicAssociateInteraction = ({
         ))}
         <button
           type="button"
-          onClick={() => addHotspot(qIndex)}
-          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={(e) => {
+            e.preventDefault();
+            addHotspot(qIndex);
+          }}
+          className="mt-2 text-blue-600"
         >
-          Add Hotspot
+          + Add Hotspot
         </button>
       </div>
     </div>

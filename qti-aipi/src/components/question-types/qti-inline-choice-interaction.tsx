@@ -58,7 +58,9 @@ export const InlineChoiceInteraction = ({
         </div>
       ))}
       <button
-        onClick={() => {
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
           const updatedQuestions = [...state.assessment.questions];
           const choices = updatedQuestions[qIndex].inlineChoices || [];
           choices.push({

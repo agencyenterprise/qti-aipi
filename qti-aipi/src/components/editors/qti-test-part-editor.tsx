@@ -1,60 +1,22 @@
 import { memo } from 'react';
-import { QTITestPart, QTIHotspot, QTISection, QTIAssessmentTest, ItemSessionControl, TimeLimits } from '../../types';
-import { CommonAttributesEditor } from './CommonAttributesEditor';
-import { SectionEditor } from './SectionEditor';
-import { Dispatch } from 'react';
-
-interface ExtendedQTIAssessmentItem extends QTIAssessmentTest {
-  itemSessionControl?: ItemSessionControl;
-  timeLimits?: TimeLimits;
-}
-
-interface State {
-  assessment: ExtendedQTIAssessmentItem;
-  isSubmitting: boolean;
-}
-
-interface Action {
-  type: 'UPDATE_ASSESSMENT' | 'START_SUBMISSION' | 'END_SUBMISSION';
-  payload?: Partial<ExtendedQTIAssessmentItem>;
-}
+import { QTITestPart, QTISection } from '../../types';
+import { CommonAttributesEditor } from './qti-common-attributes-editor';
+import { SectionEditor } from './qti-section-editor';
 
 interface TestPartEditorProps {
   testPart: QTITestPart;
   testPartIndex: number;
   onUpdate: (index: number, updates: Partial<QTITestPart>) => void;
-  updateChoice: (qIndex: number, cIndex: number, value: string) => void;
-  addChoice: (qIndex: number) => void;
-  updateOrderItem: (qIndex: number, itemIndex: number, value: string) => void;
-  addOrderItem: (qIndex: number) => void;
-  updateMatchItem: (qIndex: number, type: 'source' | 'target', itemIndex: number, value: string) => void;
-  addMatchItem: (qIndex: number, type: 'source' | 'target') => void;
-  updateGapText: (qIndex: number, gapIndex: number, value: string) => void;
-  addGapText: (qIndex: number) => void;
-  updateHotspot: (qIndex: number, hotspotIndex: number, updates: Partial<QTIHotspot>) => void;
-  addHotspot: (qIndex: number) => void;
-  state: State;
-  dispatch: Dispatch<Action>;
 }
 
 export const TestPartEditor = memo(({ 
   testPart, 
   testPartIndex,
-  onUpdate,
-  updateChoice,
-  addChoice,
-  updateOrderItem,
-  addOrderItem,
-  updateMatchItem,
-  addMatchItem,
-  updateGapText,
-  addGapText,
-  updateHotspot,
-  addHotspot,
-  state,
-  dispatch
+  onUpdate
 }: TestPartEditorProps) => {
-  const addSection = () => {
+  const addSection = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     const newSection: QTISection = {
       identifier: `section_${Date.now()}`,
       title: 'New Section',
@@ -118,28 +80,17 @@ export const TestPartEditor = memo(({
       </div>
 
       <div className="mb-4">
-        <h4 className="font-bold mb-2">Sections</h4>
-        {testPart.sections?.map((section, index) => (
+        <h4 className="font-bold mb-2 text-black">Sections</h4>
+        {testPart.sections?.map((section, sectionIndex) => (
           <SectionEditor
             key={section.identifier}
             section={section}
-            onUpdate={(updates) => updateSection(index, updates)}
-            onDelete={() => deleteSection(index)}
-            updateChoice={updateChoice}
-            addChoice={addChoice}
-            updateOrderItem={updateOrderItem}
-            addOrderItem={addOrderItem}
-            updateMatchItem={updateMatchItem}
-            addMatchItem={addMatchItem}
-            updateGapText={updateGapText}
-            addGapText={addGapText}
-            updateHotspot={updateHotspot}
-            addHotspot={addHotspot}
-            state={state}
-            dispatch={dispatch}
+            onUpdate={(updates) => updateSection(sectionIndex, updates)}
+            onDelete={() => deleteSection(sectionIndex)}
           />
         ))}
         <button
+          type="button"
           onClick={addSection}
           className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
         >

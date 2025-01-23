@@ -91,7 +91,14 @@ export const GraphicGapMatchInteraction = ({
             </div>
           </div>
         ))}
-        <button onClick={() => addHotspot(qIndex)} className="mt-2 text-blue-600">
+        <button 
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            addHotspot(qIndex);
+          }} 
+          className="mt-2 text-blue-600"
+        >
           + Add Hotspot
         </button>
       </div>

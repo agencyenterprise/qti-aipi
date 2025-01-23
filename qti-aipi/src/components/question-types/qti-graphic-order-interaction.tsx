@@ -127,7 +127,10 @@ export const GraphicOrderInteraction = ({
         ))}
         <button
           type="button"
-          onClick={() => addHotspot(qIndex)}
+          onClick={(e) => {
+            e.preventDefault();
+            addHotspot(qIndex);
+          }}
           className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Add Hotspot
