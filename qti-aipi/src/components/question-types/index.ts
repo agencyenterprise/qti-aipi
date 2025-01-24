@@ -15,4 +15,18 @@ export { CustomInteraction } from './qti-custom-interaction';
 export { GraphicAssociateInteraction } from './qti-graphic-associate-interaction';
 export { GraphicOrderInteraction } from './qti-graphic-order-interaction';
 export { PositionObjectInteraction } from './qti-position-object-interaction';
-export { SelectPointInteraction } from './qti-select-point-interaction'; 
+export { SelectPointInteraction } from './qti-select-point-interaction';
+
+export { default as MultipleChoiceQuestion } from './MultipleChoiceQuestion';
+export { default as TextEntryQuestion } from './TextEntryQuestion';
+export { default as ExtendedTextQuestion } from './ExtendedTextQuestion';
+export { default as MatchingQuestion } from './MatchingQuestion';
+
+export type QuestionType = 'multipleChoice' | 'textEntry' | 'extendedText' | 'matching';
+
+export const questionTypeLabels: Record<QuestionType, string> = {
+  multipleChoice: 'Multiple Choice',
+  textEntry: 'Text Entry',
+  extendedText: 'Extended Text',
+  matching: 'Matching',
+}; 

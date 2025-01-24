@@ -104,3 +104,43 @@ frontend: [
 "Ensure accessibility compliance"
 ]
 }
+
+# API Endpoints Architecture
+
+# Base URL: http://localhost:3000
+
+# Section Routes
+
+GET /api/sections -> Get all sections
+GET /api/sections/:id -> Get section by ID
+POST /api/sections -> Create new section
+PUT /api/sections/:id -> Update section by ID
+DELETE /api/sections/:id -> Delete section by ID
+
+# Curriculum Routes
+
+GET /api/curriculum -> Get all curriculum items
+GET /api/curriculum/:id -> Get curriculum by ID
+POST /api/curriculum -> Create new curriculum
+PUT /api/curriculum/:id -> Update curriculum by ID
+DELETE /api/curriculum/:id -> Delete curriculum by ID
+
+# Assessment Test Routes
+
+GET /api/assessment-tests -> Get all assessment tests
+GET /api/assessment-tests/:id -> Get assessment test by ID
+POST /api/assessment-tests -> Create new assessment test
+PUT /api/assessment-tests/:id -> Update assessment test by ID
+DELETE /api/assessment-tests/:id -> Delete assessment test by ID
+
+# Assessment Item Routes
+
+GET /api/assessment-items -> Get all assessment items
+GET /api/assessment-items/:id -> Get assessment item by ID
+POST /api/assessment-items -> Create new assessment item
+PUT /api/assessment-items/:id -> Update assessment item by ID
+DELETE /api/assessment-items/:id -> Delete assessment item by ID
+
+# QTI XML Parser Routes
+
+POST /api/parse-qti -> Parse QTI XML content
