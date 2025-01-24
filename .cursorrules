@@ -107,8 +107,6 @@ frontend: [
 
 # API Endpoints Architecture
 
-# Base URL: http://localhost:3000
-
 # Section Routes
 
 GET /api/sections -> Get all sections
