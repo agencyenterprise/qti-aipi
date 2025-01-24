@@ -115,3 +115,67 @@ export interface QTIQuestion {
   firstColumnHeader?: string;  // data-first-column-header
 }
 
+export interface Question {
+  identifier: string;
+  title: string;
+  prompt: string;
+  type: QuestionType;
+  points: number;
+  choices?: string[];
+  correctResponse?: string | string[];
+  feedback?: {
+    correct?: string;
+    incorrect?: string;
+  };
+  metadata?: {
+    difficulty: 'easy' | 'medium' | 'hard';
+    tags: string[];
+    timeLimit?: number;
+  };
+  baseType: BaseType;
+  cardinality: 'single' | 'multiple' | 'ordered';
+  validation?: {
+    minChoices?: number;
+    maxChoices?: number;
+    minLength?: number;
+    maxLength?: number;
+    pattern?: string;
+  };
+}
+
+export type QuestionType =
+  | 'multiple-choice'
+  | 'short-answer'
+  | 'essay'
+  | 'matching'
+  | 'hotspot'
+  | 'drag-and-drop'
+  | 'fill-in-blanks'
+  | 'matrix'
+  | 'ordering'
+  | 'true-false';
+
+export interface Choice {
+  identifier: string;
+  content: string;
+  isCorrect: boolean;
+  feedback?: string;
+}
+
+export interface MatchingChoice extends Choice {
+  matchTo: string;
+}
+
+export interface HotspotChoice extends Choice {
+  coordinates: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  };
+}
+
+export interface DragAndDropChoice extends Choice {
+  dropZone: string;
+}
+

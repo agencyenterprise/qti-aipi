@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { theme } from './theme';
+
+// Layouts
+import DashboardLayout from './layouts/DashboardLayout';
+
+// Pages
+import Dashboard from './pages/Dashboard';
+import AssessmentEditor from './pages/AssessmentEditor';
+import QuestionBank from './pages/QuestionBank';
+import Reports from './pages/Reports';
+import StudentView from './pages/StudentView';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Routes>
+            <Route path="/" element={<DashboardLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="assessments/create" element={<AssessmentEditor />} />
+              <Route path="assessments/edit/:id" element={<AssessmentEditor />} />
+              <Route path="question-bank" element={<QuestionBank />} />
+              <Route path="reports" element={<Reports />} />
+              <Route path="student" element={<StudentView />} />
+            </Route>
+          </Routes>
+        </Router>
+      </ThemeProvider>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
