@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -65,4 +69,25 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Custom styles for the assessment platform */
+.question-editor {
+  @apply border rounded-lg p-4 mb-4;
+}
+
+.question-preview {
+  @apply bg-gray-50 p-4 rounded-lg mt-4;
+}
+
+.drag-handle {
+  @apply cursor-move;
+}
+
+.option-list {
+  @apply space-y-2 mt-2;
+}
+
+.option-item {
+  @apply flex items-center space-x-2;
 }
