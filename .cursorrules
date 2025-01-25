@@ -26,13 +26,12 @@ language: "typescript"
 
 src/ {
 components/ {
-description: "React components for the application"
-qti-editor.tsx: "Main QTI assessment editor component"
+description: "Empty directory - components will be generated from @citolab/qti-components package"
 }
 
     types/ {
-      description: "TypeScript type definitions"
-      index.ts: "Core QTI types and interfaces"
+      description: "Empty directory - types will be generated from @citolab/qti-components package"
+      index.ts: "Will be populated with generated types"
     }
 
     App.tsx: "Root application component"
@@ -55,14 +54,14 @@ context {
 description: "QTI Assessment System"
 purpose: "Create and manage educational assessments following QTI standards"
 features: [
-"Assessment authoring",
-"Question management",
-"Test assembly",
+"Assessment Test authoring",
+"Item Body management",
+"Assessment Test assembly",
 "QTI XML generation"
 ]
 mainComponents: [
-"REST API for assessment management",
-"React-based assessment editor"
+"REST API for assessment test management",
+"Vite React-based assessment test editor"
 ]
 }
 
@@ -82,7 +81,7 @@ lint: "npm run lint"
 
 important_files: [
 "qti-api.yaml",
-"qti-aipi/src/components/qti-editor.tsx",
+"qti-aipi/src/components",
 "qti-aipi/src/types/index.ts",
 "qti-aipi/src/components/question-types/index.ts",
 "qti-aipi/src/components/editors/index.ts",
