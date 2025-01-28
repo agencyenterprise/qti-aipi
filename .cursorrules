@@ -1,24 +1,26 @@
 {
 "project_root": "qti-aipi",
 "architecture_description": {
-"overview": "This project is a React-based Edulastic clone implementing QTI 3.0 specifications. It uses TypeScript, Redux for state management, and Tailwind CSS for styling.",
+"overview": "This project is a React-based Edulastic clone implementing QTI 3.0 specifications. It uses TypeScript, Redux for state management built on top of a base vite react project.",
 "key_directories": {
-"src/": "Main source code directory containing React components, state management, and application logic",
-"src/components/": "Reusable UI components including QTI interaction types",
-"src/components/interactions/": "Implementation of QTI 3.0 interaction types (e.g., choice, text entry, match)",
-"src/types/": "TypeScript type definitions for QTI 3.0 data structures",
-"src/store/": "Redux store configuration and slices for state management",
-"src/pages/": "Main application pages/routes",
-"src/assets/": "Static assets like images and icons"
+"qti-aipi/src/": "Main source code directory containing React components, state management, and application logic",
+"qti-aipi/src/components/": "Reusable UI components including QTI interaction types",
+"qti-aipi/src/components/interactions/": "Implementation of QTI 3.0 interaction types (e.g., choice, text entry, match)",
+"qti-aipi/src/types/": "TypeScript type definitions for QTI 3.0 data structures",
+"qti-aipi/src/store/": "Redux store configuration and slices for state management",
+"qti-aipi/src/pages/": "Main application pages/routes",
+"qti-aipi/src/assets/": "Static assets like images and icons"
 },
 "core_concepts": {
 "assessment_structure": {
 "description": "Follows QTI 3.0 specification for assessment structure",
 "components": [
+"Curriculum - Top-level container for multiple assessments",
 "AssessmentTest - Top-level container for the entire assessment",
 "TestPart - Grouping of assessment sections",
 "AssessmentSection - Groups of related items",
-"AssessmentItem - Individual questions/interactions"
+"AssessmentItem - Individual questions/interactions",
+"ItemBody - Container for the content of an assessment item"
 ]
 },
 "interaction_types": {
@@ -47,11 +49,6 @@
 "Implement new features using Redux slices in src/store/slices/",
 "Follow React functional component patterns with hooks"
 ],
-"styling": [
-"Use Tailwind CSS for component styling",
-"Follow responsive design principles",
-"Maintain consistent UI components"
-],
 "state_management": [
 "Use Redux for global state",
 "Implement proper action creators and reducers",
@@ -74,8 +71,8 @@
 ],
 "file_patterns": {
 "include": [
-"src/**/*.{ts,tsx}",
-"src/**/*.css"
+"qti-aipi/src/**/*.{ts,tsx}",
+"qti-aipi/src/**/*.css"
 ],
 "exclude": [
 "node_modules",
@@ -85,7 +82,7 @@
 }
 }
 
-# QTI System - Hexagonal Architecture Design
+# QTI System - Hexagonal Architecture Design for the API https://alpha-qti-api-03103ecba93c.herokuapp.com/api/
 
 ## Domain Layer
 
