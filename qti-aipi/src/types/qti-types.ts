@@ -137,29 +137,19 @@ export interface ResponseDeclaration {
    * The cardinality of the response
    * @qti required
    */
-  cardinality: Cardinality;
+  cardinality: 'single' | 'multiple' | 'ordered';
 
   /**
    * The base type of the response
    * @qti required
    */
-  baseType: BaseType;
+  baseType: 'identifier' | 'string' | 'integer' | 'float' | 'point' | 'pair' | 'directedPair' | 'duration' | 'file' | 'uri';
 
   /**
    * The correct response values
    * @qti optional
    */
-  correctResponse?: {
-    /**
-     * The interpretation of the value(s) depends on the baseType
-     */
-    value: string[];
-    /**
-     * The interpretation method for the values
-     * @qti optional
-     */
-    interpretation?: string;
-  };
+  correctResponse: string[] | number[] | { source: string; target: string }[];
 
   /**
    * The mapping of response values to scores
@@ -245,26 +235,14 @@ export interface ResponseDeclaration {
  * @see https://www.imsglobal.org/spec/qti/v3p0/impl#h.interactions
  */
 export type InteractionType =
-  | 'choiceInteraction'
-  | 'orderInteraction'
-  | 'associateInteraction'
-  | 'matchInteraction'
-  | 'gapMatchInteraction'
-  | 'inlineChoiceInteraction'
-  | 'textEntryInteraction'
-  | 'extendedTextInteraction'
-  | 'hotTextInteraction'
-  | 'hotspotInteraction'
-  | 'selectPointInteraction'
-  | 'graphicOrderInteraction'
-  | 'graphicAssociateInteraction'
-  | 'graphicGapMatchInteraction'
-  | 'positionObjectInteraction'
-  | 'sliderInteraction'
-  | 'drawingInteraction'
-  | 'uploadInteraction'
-  | 'customInteraction'
-  | 'endAttemptInteraction';
+  | 'choice'
+  | 'order'
+  | 'text-entry'
+  | 'extended-text'
+  | 'match'
+  | 'gap-match'
+  | 'slider'
+  | 'hotspot';
 
 /**
  * Feedback configuration for interactions
@@ -550,4 +528,70 @@ export interface BranchRule {
    * @qti required
    */
   target: string;
+}
+
+export interface AssessmentTest {
+  id: string;
+  title: string;
+  description?: string;
+  testParts: TestPart[];
+  metadata?: Record<string, any>;
+}
+
+export interface TestPart {
+  id: string;
+  identifier: string;
+  sections: AssessmentSection[];
+  navigationMode: 'linear' | 'nonlinear';
+  submissionMode: 'individual' | 'simultaneous';
+}
+
+export interface AssessmentSection {
+  id: string;
+  identifier: string;
+  title: string;
+  items: AssessmentItem[];
+  required?: boolean;
+  visible?: boolean;
+}
+
+export interface AssessmentItem {
+  id: string;
+  identifier: string;
+  title: string;
+  prompt: string;
+  interactionType: InteractionType;
+  correctResponse: ResponseDeclaration;
+  scoring?: ScoringRules;
+  metadata?: Record<string, unknown>;
+}
+
+export interface ScoringRules {
+  score: number;
+  method: 'exact' | 'partial' | 'custom';
+  rules?: Record<string, unknown>;
+}
+
+export interface Choice {
+  id: string;
+  value: string;
+  content: string;
+  isCorrect?: boolean;
+}
+
+export interface MatchSet {
+  id: string;
+  source: string;
+  target: string;
+}
+
+export interface ResponseProcessing {
+  template: string;
+  rules: ResponseRule[];
+}
+
+export interface ResponseRule {
+  condition: string;
+  outcome: string;
+  score?: number;
 }
