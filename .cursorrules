@@ -1,106 +1,356 @@
-# QTI Assessment System Project Structure
-
-# This project consists of two main parts:
-
-# 1. QTI API (OpenAPI/Swagger specification)
-
-# 2. QTI AIPI (React+TypeScript frontend application)
-
-# Core API Specification
-
-qti-api.yaml {
-description: "OpenAPI/Swagger specification for the QTI Assessment Engine API"
-type: "api-spec"
-importance: "high"
-}
-
-# Frontend Application (qti-aipi)
-
-qti-aipi/ {
-description: "React+TypeScript frontend application for QTI assessment authoring"
-type: "frontend"
-framework: "react"
-language: "typescript"
-
-# Core Application Files
-
-src/ {
-components/ {
-description: "React components for the application"
-qti-editor.tsx: "Main QTI assessment editor component"
-}
-
-    types/ {
-      description: "TypeScript type definitions"
-      index.ts: "Core QTI types and interfaces"
-    }
-
-    App.tsx: "Root application component"
-    main.tsx: "Application entry point"
-
-}
-
-# Configuration Files
-
-package.json: "Project dependencies and scripts"
-tsconfig.json: "TypeScript configuration"
-tsconfig.app.json: "App-specific TypeScript config"
-tsconfig.node.json: "Node-specific TypeScript config"
-vite.config.ts: "Vite bundler configuration"
-}
-
-# Project Context
-
-context {
-description: "QTI Assessment System"
-purpose: "Create and manage educational assessments following QTI standards"
-features: [
-"Assessment authoring",
-"Question management",
-"Test assembly",
-"QTI XML generation"
+{
+"project_root": "qti-aipi",
+"architecture_description": {
+"overview": "This project is a React-based Edulastic clone implementing QTI 3.0 specifications. It uses TypeScript, Redux for state management, and Tailwind CSS for styling.",
+"key_directories": {
+"src/": "Main source code directory containing React components, state management, and application logic",
+"src/components/": "Reusable UI components including QTI interaction types",
+"src/components/interactions/": "Implementation of QTI 3.0 interaction types (e.g., choice, text entry, match)",
+"src/types/": "TypeScript type definitions for QTI 3.0 data structures",
+"src/store/": "Redux store configuration and slices for state management",
+"src/pages/": "Main application pages/routes",
+"src/assets/": "Static assets like images and icons"
+},
+"core_concepts": {
+"assessment_structure": {
+"description": "Follows QTI 3.0 specification for assessment structure",
+"components": [
+"AssessmentTest - Top-level container for the entire assessment",
+"TestPart - Grouping of assessment sections",
+"AssessmentSection - Groups of related items",
+"AssessmentItem - Individual questions/interactions"
 ]
-mainComponents: [
-"REST API for assessment management",
-"React-based assessment editor"
+},
+"interaction_types": {
+"description": "Implements QTI 3.0 interaction types",
+"components": [
+"Choice Interactions",
+"Text Entry Interactions",
+"Match Interactions",
+"Order Interactions",
+"Extended Text Interactions"
+]
+},
+"state_management": {
+"description": "Redux-based state management",
+"slices": [
+"assessmentsSlice - Manages assessment data and structure",
+"questionBankSlice - Handles question repository",
+"uiSlice - Manages UI state and interactions"
 ]
 }
-
-# Build Instructions
-
-build {
-api: "OpenAPI/Swagger specification - no build required"
-frontend: {
-install: "npm install"
-dev: "npm run dev"
-build: "npm run build"
-lint: "npm run lint"
+},
+"development_guidelines": {
+"code_organization": [
+"Place new interaction types in src/components/interactions/",
+"Define TypeScript interfaces in src/types/",
+"Implement new features using Redux slices in src/store/slices/",
+"Follow React functional component patterns with hooks"
+],
+"styling": [
+"Use Tailwind CSS for component styling",
+"Follow responsive design principles",
+"Maintain consistent UI components"
+],
+"state_management": [
+"Use Redux for global state",
+"Implement proper action creators and reducers",
+"Follow Redux Toolkit patterns"
+]
+},
+"key_features": [
+"Question authoring interface",
+"Assessment creation and management",
+"QTI 3.0 compliant interaction types",
+"Response processing and scoring",
+"Assessment preview and testing"
+]
+},
+"recommended_tools": [
+"TypeScript for type safety",
+"Redux DevTools for state debugging",
+"React Developer Tools",
+"Vite for development server"
+],
+"file_patterns": {
+"include": [
+"src/**/*.{ts,tsx}",
+"src/**/*.css"
+],
+"exclude": [
+"node_modules",
+"dist",
+"build"
+]
 }
 }
 
-# Key Files for Development
+# QTI System - Hexagonal Architecture Design
 
-important_files: [
-"qti-api.yaml",
-"qti-aipi/src/components/qti-editor.tsx",
-"qti-aipi/src/types/index.ts",
-"qti-aipi/src/components/question-types/index.ts",
-"qti-aipi/src/components/editors/index.ts",
-"qti-aipi/src/App.tsx"
-]
+## Domain Layer
 
-# Development Guidelines
+### Core Entities
 
-guidelines {
-api: [
-"Follow OpenAPI 3.0.0 specification",
-"Maintain RESTful principles",
-"Include comprehensive documentation"
-]
-frontend: [
-"Use TypeScript for type safety",
-"Follow React best practices",
-"Maintain component reusability",
-"Ensure accessibility compliance"
-]
+#### AssessmentItem
+
+- **Identity**: identifier (string)
+- **Properties**:
+  - title
+  - qtiVersion
+  - itemBody
+  - responseDeclarations
+  - outcomeDeclarations
+  - templateDeclarations
+  - metadata
+
+#### AssessmentTest
+
+- **Identity**: identifier (string)
+- **Properties**:
+  - title
+  - qtiVersion
+  - testParts
+  - outcomeDeclarations
+  - timeLimits
+  - metadata
+
+#### Section
+
+- **Identity**: identifier (string)
+- **Properties**:
+  - title
+  - assessmentTestId
+  - visible
+  - ordering
+  - preConditions
+  - branchRules
+  - itemReferences
+  - metadata
+
+#### Curriculum
+
+- **Identity**: identifier (string)
+- **Properties**:
+  - tests (relationship with AssessmentTest)
+  - testSequence
+
+### Value Objects
+
+#### QTIMetadata
+
+- itemTemplate
+- timeDependent
+- composite
+- interactionType
+- portableCustomInteractionContext
+- feedbackType
+- solutionAvailable
+- scoringMode
+- toolName
+- toolVersion
+- toolVendor
+
+#### TestPart
+
+- identifier
+- navigationMode
+- submissionMode
+- preConditions
+- branchRules
+- itemSessionControl
+- timeLimits
+
+#### ItemBody
+
+- elements
+- interactions
+
+## Application Layer (Use Cases)
+
+### AssessmentItem Use Cases
+
+1. Create Assessment Item from QTI XML
+2. Search Assessment Items
+3. Get Assessment Item by Identifier
+4. Update Assessment Item
+5. Delete Assessment Item
+
+### AssessmentTest Use Cases
+
+1. Create Assessment Test from JSON
+2. Search Assessment Tests
+3. Get Assessment Test by Identifier
+4. Update Assessment Test
+5. Delete Assessment Test
+
+### Section Use Cases
+
+1. Create Section from XML
+2. Create Section
+3. Search Sections
+4. Get Section by Identifier
+5. Update Section
+6. Delete Section
+7. Add Item to Section
+8. Remove Item from Section
+9. Update Item Order in Section
+
+### Curriculum Use Cases
+
+1. Search Curricula
+2. Get Curriculum by Identifier
+3. Create Curriculum
+4. Update Curriculum
+5. Delete Curriculum
+6. Add Test to Curriculum
+7. Remove Test from Curriculum
+8. Update Test Sequence
+
+## Ports
+
+### Primary Ports (Driving/Input)
+
+```typescript
+interface AssessmentItemPort {
+  createFromQtiXml(xml: string): Promise<AssessmentItem>;
+  search(query?: string, metadata?: string): Promise<AssessmentItem[]>;
+  getByIdentifier(identifier: string): Promise<AssessmentItem>;
+  update(
+    identifier: string,
+    data: Partial<AssessmentItem>
+  ): Promise<AssessmentItem>;
+  delete(identifier: string): Promise<void>;
 }
+
+interface AssessmentTestPort {
+  createFromJson(data: any): Promise<AssessmentTest>;
+  search(): Promise<AssessmentTest[]>;
+  getByIdentifier(identifier: string): Promise<AssessmentTest>;
+  update(
+    identifier: string,
+    data: Partial<AssessmentTest>
+  ): Promise<AssessmentTest>;
+  delete(identifier: string): Promise<void>;
+}
+
+interface SectionPort {
+  createFromXml(xml: string): Promise<Section>;
+  create(data: any): Promise<Section>;
+  search(): Promise<Section[]>;
+  getByIdentifier(identifier: string): Promise<Section>;
+  update(identifier: string, data: any): Promise<Section>;
+  delete(identifier: string): Promise<void>;
+  addItem(identifier: string, itemId: string): Promise<void>;
+  removeItem(identifier: string, itemId: string): Promise<void>;
+  updateItemOrder(
+    identifier: string,
+    itemId: string,
+    order: number
+  ): Promise<void>;
+}
+
+interface CurriculumPort {
+  search(): Promise<Curriculum[]>;
+  getByIdentifier(identifier: string): Promise<Curriculum>;
+  create(data: any): Promise<Curriculum>;
+  update(identifier: string, data: any): Promise<Curriculum>;
+  delete(identifier: string): Promise<void>;
+  addTest(identifier: string, testId: string): Promise<void>;
+  removeTest(identifier: string, testId: string): Promise<void>;
+  updateTestSequence(
+    identifier: string,
+    testId: string,
+    sequence: number
+  ): Promise<void>;
+}
+```
+
+### Secondary Ports (Driven/Output)
+
+```typescript
+interface QtiRepository {
+  saveAssessmentItem(item: AssessmentItem): Promise<void>;
+  saveAssessmentTest(test: AssessmentTest): Promise<void>;
+  saveSection(section: Section): Promise<void>;
+  saveCurriculum(curriculum: Curriculum): Promise<void>;
+
+  findAssessmentItem(identifier: string): Promise<AssessmentItem>;
+  findAssessmentTest(identifier: string): Promise<AssessmentTest>;
+  findSection(identifier: string): Promise<Section>;
+  findCurriculum(identifier: string): Promise<Curriculum>;
+
+  deleteAssessmentItem(identifier: string): Promise<void>;
+  deleteAssessmentTest(identifier: string): Promise<void>;
+  deleteSection(identifier: string): Promise<void>;
+  deleteCurriculum(identifier: string): Promise<void>;
+}
+
+interface QtiXmlParser {
+  parseAssessmentItem(xml: string): AssessmentItem;
+  parseSection(xml: string): Section;
+}
+
+interface QtiXmlConverter {
+  convertToXml(item: AssessmentItem): string;
+  convertToXml(section: Section): string;
+}
+```
+
+## Adapters
+
+### Primary Adapters (Driving/Input)
+
+- REST API Controllers (Express.js)
+  - AssessmentItemController
+  - AssessmentTestController
+  - SectionController
+  - CurriculumController
+
+### Secondary Adapters (Driven/Output)
+
+- Database Repositories
+  - PostgreSQL Implementation of QtiRepository
+- XML Services
+  - QtiXmlParserImpl
+  - QtiXmlConverterImpl
+
+## API Routes
+
+### Assessment Items (`/assessment-items`)
+
+- POST `/` - Create from QTI XML
+- GET `/` - Search items
+- GET `/:identifier` - Get item by identifier
+- PUT `/:identifier` - Update item
+- DELETE `/:identifier` - Delete item
+
+### Assessment Tests (`/assessment-tests`)
+
+- POST `/` - Create from JSON
+- GET `/` - Search tests
+- GET `/:identifier` - Get test by identifier
+- PUT `/:identifier` - Update test
+- DELETE `/:identifier` - Delete test
+
+### Sections (`/sections`)
+
+- POST `/xml` - Create from XML
+- POST `/` - Create section
+- GET `/` - Search sections
+- GET `/:identifier` - Get section by identifier
+- PUT `/:identifier` - Update section
+- DELETE `/:identifier` - Delete section
+- POST `/:identifier/items` - Add item to section
+- DELETE `/:identifier/items/:itemId` - Remove item from section
+- PUT `/:identifier/items/:itemId/order` - Update item order
+
+### Curriculum (`/curriculum`)
+
+- GET `/` - Search curricula
+- GET `/:identifier` - Get curriculum by identifier
+- POST `/` - Create curriculum
+- PUT `/:identifier` - Update curriculum
+- DELETE `/:identifier` - Delete curriculum
+- POST `/:identifier/tests` - Add test to curriculum
+- DELETE `/:identifier/tests/:testId` - Remove test from curriculum
+- PUT `/:identifier/tests/:testId/sequence` - Update test sequence
