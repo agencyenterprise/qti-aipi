@@ -1,0 +1,147 @@
+/**
+ * QTI Assessment Editor - Architecture and Development Guidelines
+ * 
+ * IMPORTANT: All development must occur within the qti-aipi folder!
+ */
+
+// Core Development Rules
+const developmentRules = {
+  rootDirectory: "qti-aipi",
+  buildConstraints: "All development must occur within qti-aipi folder",
+  primaryObjective: "Build an Edulastic clone with QTI 3.0 compliance",
+  secondaryObjective: "Integrate with QTI 3.0 compliant API",
+};
+
+// Application Architecture
+const architecture = {
+  frontend: {
+    framework: "Next.js",
+    baseComponents: {
+      location: "src/components",
+      examples: [
+        "AssessmentItem.tsx", // Base component for QTI items
+        "ItemBody.tsx" // Handles item content and interactions
+      ]
+    },
+    typeDefinitions: {
+      location: "src/types",
+      coreTypes: [
+        "assessment-item.ts",
+        "assessment-test.ts",
+        "item-body.ts",
+        "qti-types.ts"
+      ]
+    }
+  },
+  
+  api: {
+    baseUrl: "http://localhost:3000/api",
+    architecture: "Hexagonal (Ports & Adapters)",
+    
+    domain: {
+      coreEntities: [
+        "AssessmentItem",
+        "AssessmentTest",
+        "Section",
+        "Curriculum"
+      ],
+      valueObjects: [
+        "QTIMetadata",
+        "TestPart",
+        "ItemBody"
+      ]
+    },
+    
+    ports: {
+      primary: [
+        "AssessmentItemPort",
+        "AssessmentTestPort",
+        "SectionPort",
+        "CurriculumPort"
+      ],
+      secondary: [
+        "QtiRepository",
+        "QtiXmlParser",
+        "QtiXmlConverter"
+      ]
+    },
+    
+    endpoints: {
+      assessmentItems: {
+        base: "/assessment-items",
+        operations: [
+          "POST / - Create from QTI XML",
+          "GET / - Search items",
+          "GET /:identifier - Get by ID",
+          "PUT /:identifier - Update",
+          "DELETE /:identifier - Delete"
+        ]
+      },
+      assessmentTests: {
+        base: "/assessment-tests",
+        operations: [/* similar CRUD operations */]
+      },
+      sections: {
+        base: "/sections",
+        operations: [/* section-specific operations */]
+      },
+      curriculum: {
+        base: "/curriculum",
+        operations: [/* curriculum-specific operations */]
+      }
+    }
+  }
+};
+
+// Development Guidelines
+const guidelines = {
+  componentDevelopment: {
+    location: "src/components",
+    rules: [
+      "Use TypeScript for all components",
+      "Follow QTI 3.0 specification strictly",
+      "Implement proper type checking",
+      "Include JSDoc documentation"
+    ]
+  },
+  
+  typeDefinitions: {
+    location: "src/types",
+    rules: [
+      "Define interfaces for all QTI elements",
+      "Use strict typing",
+      "Include QTI spec references in comments"
+    ]
+  },
+  
+  apiIntegration: {
+    rules: [
+      "Use provided API endpoints",
+      "Handle XML parsing/generation",
+      "Implement proper error handling",
+      "Follow RESTful practices"
+    ]
+  }
+};
+
+// Architectural Constraints
+const constraints = {
+  buildLocation: "qti-aipi folder only",
+  apiCompliance: "Must follow QTI 3.0 specification",
+  componentStructure: "Follow existing component patterns",
+  typeSystem: "Use provided type definitions",
+  stateManagement: "Use React hooks and context",
+  dataFlow: "Follow unidirectional data flow"
+};
+
+/**
+ * Instructions for LLMs:
+ * 1. All new code must be created within qti-aipi folder
+ * 2. Use existing type definitions from src/types
+ * 3. Follow component patterns from src/components
+ * 4. Integrate with API using provided endpoints
+ * 5. Maintain QTI 3.0 compliance
+ * 6. Document code with JSDoc comments
+ * 7. Include type safety checks
+ * 8. Follow hexagonal architecture patterns
+ */ 
