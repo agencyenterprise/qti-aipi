@@ -1,15 +1,14 @@
 /**
  * QTI Assessment Editor - Architecture and Development Guidelines
  * 
- * IMPORTANT: All development must occur within the qti-aipi folder!
  */
 
 // Core Development Rules
 const developmentRules = {
   rootDirectory: "qti-aipi",
   buildConstraints: "All development must occur within qti-aipi folder",
-  primaryObjective: "Build an Edulastic clone with QTI 3.0 compliance",
-  secondaryObjective: "Integrate with QTI 3.0 compliant API",
+  primaryObjective: "Build a QTI 3.0 compliant assessment editor",
+  secondaryObjective: "Ensure strict adherence to QTI 3.0 specification and API compliance",
 };
 
 // Application Architecture
@@ -126,22 +125,22 @@ const guidelines = {
 
 // Architectural Constraints
 const constraints = {
-  buildLocation: "qti-aipi folder only",
-  apiCompliance: "Must follow QTI 3.0 specification",
-  componentStructure: "Follow existing component patterns",
-  typeSystem: "Use provided type definitions",
+  qtiCompliance: "Strict adherence to QTI 3.0 specification",
+  xmlValidation: "All generated XML must validate against QTI 3.0 schemas",
+  componentStructure: "Follow QTI 3.0 element hierarchy and relationships",
+  typeSystem: "Use provided type definitions matching QTI 3.0 spec",
   stateManagement: "Use React hooks and context",
   dataFlow: "Follow unidirectional data flow"
 };
 
 /**
  * Instructions for LLMs:
- * 1. All new code must be created within qti-aipi folder
- * 2. Use existing type definitions from src/types
- * 3. Follow component patterns from src/components
- * 4. Integrate with API using provided endpoints
- * 5. Maintain QTI 3.0 compliance
- * 6. Document code with JSDoc comments
+ * 1. Ensure strict compliance with QTI 3.0 specification
+ * 2. Validate all XML output against QTI 3.0 schemas
+ * 3. Use existing type definitions from src/types
+ * 4. Follow QTI 3.0 component patterns and hierarchy
+ * 5. Integrate with API using provided endpoints
+ * 6. Document code with JSDoc comments including QTI spec references
  * 7. Include type safety checks
  * 8. Follow hexagonal architecture patterns
  */ 
