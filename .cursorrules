@@ -161,3 +161,6 @@ const singleAssessment = await qtiAssessments.getAssessment('assessment-456');
 
 
 
+4. **QTI API Examples:**
+
+You can find the QTI API examples in the `qti_items.json` and `qti_tests.json` files.
