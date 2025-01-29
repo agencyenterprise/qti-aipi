@@ -1,0 +1,163 @@
+# Next.js Quention & Test Interoperability (QTI) Editor
+
+## Summary
+
+The objective is to build a fully functional, deployable Next.js application integrated with the QTI API. **All responses must adhere to the following requirements**, including the generation of a complete `package.json` file as the first item in every response. Every code snippet must comply with the provided patterns, file setups, and project structure.
+
+---
+
+
+
+## CRITICAL REQUIREMENTS
+
+- **`package.json` file:**
+  - MUST be included first in EVERY response.
+  - MUST use specific versions for core dependencies (React, Next.js) as shown in the example below.
+  - Use `"latest"` only for utility packages that do not have direct React version dependencies.
+  - The app MUST build and run with the following commands:
+    ```bash
+    npm install && npm run build && npm run start
+    ```
+  - CRITICAL: endpoints MUST reference the existing QTI API endpoints described below.
+  - Always rely on the API server for error handling. Do not generate custom error codes; instead, accept and process the error responses as returned by the API.
+  - When updating the app, always check the entire codebase.
+
+---
+
+
+## AI ASSISTANT RULES
+
+1. You MUST read and follow ALL patterns and examples provided in this document.
+2. You MUST NOT create your own patterns or "improve" existing ones.
+3. Validate each code block against the patterns shown in this document.
+4. EVERY response MUST start by checking compliance with these rules.
+5. If a pattern exists in these rules, you MUST use it verbatim.
+
+---
+
+
+
+## Environment and Framework Requirements
+
+- **Framework:** Next.js (v13+) with React 18.x.
+- **Environment:** Node.js v20 is assumed.
+
+---
+
+### Required Files
+
+The project MUST include the following files and adhere to their defined structure:
+
+1. **`package.json`:**
+
+   ```json
+   {
+     "name": "oneroster-nextjs-app",
+     "version": "0.1.0",
+     "private": true,
+     "scripts": {
+       "dev": "next dev",
+       "build": "next build",
+       "start": "next start",
+       "lint": "next lint"
+     },
+     "dependencies": {
+       "next": "13.4.19",
+       "react": "18.2.0",
+       "react-dom": "18.2.0",
+       "typescript": "5.0.4",
+       "tailwindcss": "3.3.0",
+       "autoprefixer": "10.4.14",
+       "postcss": "8.4.21"
+     },
+     "devDependencies": {
+       "eslint": "8.27.0",
+       "eslint-config-next": "13.4.19",
+       "@types/node": "18.11.9",
+       "@types/react": "18.0.25",
+       "@types/react-dom": "18.0.9"
+     }
+   }
+   ```
+
+
+2. **API Base URL Configuration:**
+
+   - Store in `.env`:
+     ```bash
+     NEXT_PUBLIC_QTI_BASE_URL=https://alpha-qti-api-43487de62e73.herokuapp.com/api
+     ```
+
+
+3. **QTI API Endpoints Examples:**
+
+// QTI Items GET requests
+const qtiItems = {
+  // Get all QTI items with optional pagination and search
+  getAllItems: async (page = 1, limit = 10, search = '') => {
+    try {
+      const response = await axios.get(`${baseURL}/qti-items`, {
+        params: { page, limit, search }
+      });
+      return response.data; // Returns { items, total, page, pages }
+    } catch (error) {
+      console.error('Error fetching items:', error.response.data);
+      throw error;
+    }
+  },
+
+  // Get a single QTI item by identifier
+  getItem: async (identifier) => {
+    try {
+      const response = await axios.get(`${baseURL}/qti-items/${identifier}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching item:', error.response.data);
+      throw error;
+    }
+  }
+};
+
+// QTI Assessments GET requests
+const qtiAssessments = {
+  // Get all assessments
+  getAllAssessments: async () => {
+    try {
+      const response = await axios.get(`${baseURL}/qti`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching assessments:', error.response.data);
+      throw error;
+    }
+  },
+
+  // Get a single assessment by identifier
+  getAssessment: async (identifier) => {
+    try {
+      const response = await axios.get(`${baseURL}/qti/${identifier}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching assessment:', error.response.data);
+      throw error;
+    }
+  }
+};
+
+// Example usage:
+// Get all items with default pagination
+const items = await qtiItems.getAllItems();
+
+// Get items with custom pagination and search
+const searchedItems = await qtiItems.getAllItems(1, 20, 'math');
+
+// Get a specific item
+const singleItem = await qtiItems.getItem('item-123');
+
+// Get all assessments
+const assessments = await qtiAssessments.getAllAssessments();
+
+// Get a specific assessment
+const singleAssessment = await qtiAssessments.getAssessment('assessment-456');
+
+
+
