@@ -1,0 +1,203 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  firstName     String
+  lastName      String
+  role          UserRole
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  classes       Class[]        @relation("TeacherClasses")
+  enrollments   Enrollment[]
+  createdTests  Assessment[]   @relation("CreatedAssessments")
+  submissions   Submission[]
+  assignments   Assignment[]   @relation("TeacherAssignments")
+  qtiAssessments QtiAssessment[] @relation("CreatedQtiAssessments")
+}
+
+enum UserRole {
+  TEACHER
+  STUDENT
+}
+
+model Class {
+  id          String       @id @default(uuid())
+  name        String
+  description String?
+  code        String       @unique
+  teacherId   String
+  teacher     User         @relation("TeacherClasses", fields: [teacherId], references: [id])
+  enrollments Enrollment[]
+  assignments Assignment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Enrollment {
+  id        String   @id @default(uuid())
+  classId   String
+  studentId String
+  class     Class    @relation(fields: [classId], references: [id])
+  student   User     @relation(fields: [studentId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([classId, studentId])
+}
+
+model Assessment {
+  id          String       @id @default(uuid())
+  title       String
+  description String?
+  creatorId   String
+  creator     User         @relation("CreatedAssessments", fields: [creatorId], references: [id])
+  questions   Question[]
+  assignments Assignment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Question {
+  id           String          @id @default(uuid())
+  type         QuestionType
+  content      String
+  options      Json?           // For multiple choice questions
+  correctAnswer String?        // For objective questions
+  points       Int
+  assessmentId String
+  assessment   Assessment      @relation(fields: [assessmentId], references: [id])
+  answers      Answer[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  SHORT_ANSWER
+  ESSAY
+  TRUE_FALSE
+  MATCHING
+}
+
+model Assignment {
+  id           String       @id @default(uuid())
+  title        String
+  instructions String?
+  dueDate      DateTime
+  timeLimit    Int?        // in minutes
+  assessmentId String
+  assessment   Assessment   @relation(fields: [assessmentId], references: [id])
+  classId      String
+  class        Class        @relation(fields: [classId], references: [id])
+  teacherId    String
+  teacher      User         @relation("TeacherAssignments", fields: [teacherId], references: [id])
+  submissions  Submission[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Submission {
+  id           String   @id @default(uuid())
+  studentId    String
+  student      User     @relation(fields: [studentId], references: [id])
+  assignmentId String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  startedAt    DateTime
+  submittedAt  DateTime?
+  score        Float?
+  answers      Answer[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([studentId, assignmentId])
+}
+
+model Answer {
+  id           String     @id @default(uuid())
+  content      String
+  isCorrect    Boolean?
+  points       Float?
+  questionId   String
+  question     Question   @relation(fields: [questionId], references: [id])
+  submissionId String
+  submission   Submission @relation(fields: [submissionId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([questionId, submissionId])
+}
+
+// QTI Models
+model QtiAssessment {
+  id          String   @id @default(cuid())
+  identifier  String   @unique
+  title       String
+  toolName    String   @default("EduAssess QTI Editor")
+  toolVersion String   @default("1.0")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  creatorId   String
+  creator     User     @relation("CreatedQtiAssessments", fields: [creatorId], references: [id])
+  testParts   QtiTestPart[]
+
+  @@map("qti_assessments")
+}
+
+model QtiTestPart {
+  id              String   @id @default(cuid())
+  identifier      String
+  navigationMode  String   @default("linear")
+  submissionMode  String   @default("individual")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  assessmentId    String
+  assessment      QtiAssessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  sections        QtiAssessmentSection[]
+
+  @@unique([identifier, assessmentId])
+  @@map("qti_test_parts")
+}
+
+model QtiAssessmentSection {
+  id          String   @id @default(cuid())
+  identifier  String
+  title       String
+  visible     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  testPartId  String
+  testPart    QtiTestPart @relation(fields: [testPartId], references: [id], onDelete: Cascade)
+  items       QtiAssessmentItem[]
+
+  @@unique([identifier, testPartId])
+  @@map("qti_assessment_sections")
+}
+
+model QtiAssessmentItem {
+  id              String   @id @default(cuid())
+  identifier      String
+  title           String
+  adaptive        Boolean  @default(false)
+  timeDependent   Boolean  @default(false)
+  interactionType String
+  questionText    String
+  correctResponse String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  sectionId       String
+  section         QtiAssessmentSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  @@unique([identifier, sectionId])
+  @@map("qti_assessment_items")
+} 

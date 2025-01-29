@@ -1,58 +1,106 @@
-# QTI Assessment Editor
+# EduAssess - Online Assessment Platform
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+EduAssess is a modern web application that facilitates online education by providing a platform for teachers to create and manage classes, assignments, and assessments, while allowing students to join classes and submit their work.
 
-## Important: AI Prompting System
+## Features
 
-This repository serves as an AI prompting system that guides you in building a Next.js frontend application for QTI assessment editing. By following the prompting guidelines and providing clear requirements, you can interact with AI to help you develop the necessary components, features, and functionality.
+### For Teachers
 
-The AI assistant is configured to understand:
+- Create and manage classes
+- Create assignments with due dates
+- View and grade student submissions
+- Track student progress
+- Generate class-specific access codes
 
-- QTI 3.0 specification requirements
-- Next.js frontend development patterns
-- CSV-based data persistence strategies
-- Component architecture and best practices
+### For Students
 
-When interacting with the AI, you'll receive guidance, code snippets, and implementation details for building out your QTI editor application.
+- Join classes using access codes
+- View and submit assignments
+- Track assignment deadlines
+- View grades and feedback
 
-## Development Guidelines
+## Technology Stack
 
-All development must occur within the `qti-aipi` folder. The project follows a hexagonal architecture pattern and strict TypeScript typing. Key points:
+- **Frontend**:
+  - React 18
+  - TypeScript
+  - Material-UI (MUI)
+  - React Router v7
+  - Redux Toolkit
+  - React Query
+  - Formik & Yup
+  - Axios
 
-- Use TypeScript for all components
-- Follow QTI 3.0 specification strictly
-- Implement proper type checking
-- Include JSDoc documentation
-- Follow provided API endpoint patterns
-- Maintain unidirectional data flow
+## Getting Started
 
-## About The Application
+### Prerequisites
 
-This is a Question & Test Interoperability (QTI) 3.0 Assessment Editor built with Next.js. The application's primary purpose is to provide a user-friendly interface for:
+- Node.js >= 18.0.0
+- npm >= 7.0.0
 
-- Uploading and importing existing QTI 3.0 compliant questions and tests
-- Creating and editing assessment questions through an intuitive interface
-- Organizing questions into tests and assessment sets
-- Saving work-in-progress and completed assessments
-- Exporting questions and tests in QTI 3.0 compliant format
+### Installation
 
-Key Features:
+1. Clone the repository:
 
-- **Question Management**: Upload, create, edit, and organize assessment test questions
-- **QTI Compliance**: Automatic validation against QTI 3.0 standards
+```bash
+git clone https://github.com/yourusername/eduassess.git
+cd eduassess
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory and add the following environment variables:
+
+```env
+VITE_API_URL=http://localhost:8000
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:3000`.
+
+## Project Structure
+
+```
+src/
+├── components/        # Reusable components
+│   ├── guards/       # Route protection components
+│   └── layouts/      # Layout components
+├── pages/            # Page components
+│   ├── auth/         # Authentication pages
+│   ├── teacher/      # Teacher-specific pages
+│   └── student/      # Student-specific pages
+├── services/         # API services
+├── store/            # Redux store configuration
+│   └── slices/       # Redux slices
+├── theme.ts          # MUI theme configuration
+├── App.tsx           # Root component
+└── main.tsx         # Application entry point
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
 ## Contributing
 
-When contributing to this project, please ensure your changes comply with the QTI 3.0 specification. All new features should include appropriate validation and error handling.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Documentation
+## License
 
-- [QTI 3.0 Specification](https://www.imsglobal.org/spec/qti/v3p0/impl)
-
-## Support
-
-For questions and support:
-
-1. Check the documentation first
-2. Review existing issues
-3. Create a new issue with a clear description following the prompting guidelines above
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
