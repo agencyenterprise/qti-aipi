@@ -1,0 +1,3140 @@
+[{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4cfd"
+  },
+  "identifier": "SineRule-CalcFormQ-002",
+  "title": "Apply the sine rule",
+  "type": "qti-assessment-item",
+  "content": {
+    "tool-version": "0.5.1",
+    "tool-name": "Mathqurate",
+    "title": "Apply the sine rule",
+    "time-dependent": "false",
+    "identifier": "SineRule-CalcFormQ-002",
+    "adaptive": "false",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd http://www.w3.org/1998/Math/MathML https://purl.imsglobal.org/spec/mathml/v3p0/schema/xsd/mathml3.xsd http://www.w3.org/2001/XInclude https://purl.imsglobal.org/spec/w3/2001/schema/xsd/XInclude.xsd",
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xi": "http://www.w3.org/2001/XInclude",
+    "xmlns:m": "http://www.w3.org/1998/Math/MathML",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "qti-response-declaration": [
+      {
+        "identifier": "RESPONSE1",
+        "cardinality": "single",
+        "base-type": "float"
+      },
+      {
+        "identifier": "RESPONSE2",
+        "cardinality": "single",
+        "base-type": "string"
+      }
+    ],
+    "qti-outcome-declaration": [
+      {
+        "base-type": "identifier",
+        "cardinality": "single",
+        "identifier": "FEEDBACK"
+      },
+      {
+        "base-type": "float",
+        "cardinality": "single",
+        "identifier": "SCORE",
+        "normal-maximum": "10.0",
+        "normal-minimum": "0.0",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      }
+    ],
+    "qti-template-declaration": [
+      {
+        "identifier": "A",
+        "cardinality": "single",
+        "base-type": "integer",
+        "param-variable": "false",
+        "math-variable": "true"
+      },
+      {
+        "identifier": "B",
+        "cardinality": "single",
+        "base-type": "integer",
+        "param-variable": "false",
+        "math-variable": "true"
+      },
+      {
+        "identifier": "a",
+        "cardinality": "single",
+        "base-type": "integer",
+        "param-variable": "false",
+        "math-variable": "true"
+      },
+      {
+        "identifier": "fAns",
+        "cardinality": "single",
+        "base-type": "float",
+        "param-variable": "false",
+        "math-variable": "true"
+      },
+      {
+        "identifier": "fPiOver180",
+        "cardinality": "single",
+        "base-type": "float",
+        "param-variable": "false",
+        "math-variable": "true"
+      }
+    ],
+    "qti-template-processing": {
+      "qti-set-template-value": [
+        {
+          "identifier": "A",
+          "qti-random-integer": {
+            "min": "5",
+            "max": "100"
+          }
+        },
+        {
+          "identifier": "B",
+          "qti-random-integer": {
+            "min": "5",
+            "max": "70"
+          }
+        },
+        {
+          "identifier": "a",
+          "qti-random-integer": {
+            "min": "5",
+            "max": "50"
+          }
+        },
+        {
+          "identifier": "fPiOver180",
+          "qti-divide": {
+            "qti-math-constant": {
+              "name": "pi"
+            },
+            "qti-base-value": {
+              "_": "180",
+              "base-type": "integer"
+            }
+          }
+        },
+        {
+          "identifier": "fAns",
+          "qti-divide": {
+            "qti-product": {
+              "qti-variable": {
+                "identifier": "a"
+              },
+              "qti-math-operator": {
+                "name": "sin",
+                "qti-product": {
+                  "qti-subtract": {
+                    "qti-base-value": {
+                      "_": "180",
+                      "base-type": "integer"
+                    },
+                    "qti-sum": {
+                      "qti-variable": [
+                        {
+                          "identifier": "A"
+                        },
+                        {
+                          "identifier": "B"
+                        }
+                      ]
+                    }
+                  },
+                  "qti-variable": {
+                    "identifier": "fPiOver180"
+                  }
+                }
+              }
+            },
+            "qti-math-operator": {
+              "name": "sin",
+              "qti-product": {
+                "qti-variable": [
+                  {
+                    "identifier": "A"
+                  },
+                  {
+                    "identifier": "fPiOver180"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "identifier": "fAns",
+          "qti-divide": {
+            "qti-round": {
+              "qti-product": {
+                "qti-variable": {
+                  "identifier": "fAns"
+                },
+                "qti-base-value": {
+                  "_": "100",
+                  "base-type": "integer"
+                }
+              }
+            },
+            "qti-base-value": {
+              "_": "100",
+              "base-type": "integer"
+            }
+          }
+        }
+      ]
+    },
+    "qti-item-body": {
+      "p": {
+        "_": "In triangle ABC, a=cm, A=° and B=°. Find the length of side c.",
+        "qti-printed-variable": [
+          {
+            "identifier": "a"
+          },
+          {
+            "identifier": "A"
+          },
+          {
+            "identifier": "B"
+          }
+        ]
+      },
+      "div": [
+        {
+          "class": "",
+          "qti-text-entry-interaction": [
+            {
+              "response-identifier": "RESPONSE1",
+              "expected-length": "20"
+            },
+            {
+              "response-identifier": "RESPONSE2",
+              "expected-length": "5"
+            }
+          ]
+        },
+        {
+          "class": "",
+          "qti-feedback-inline": {
+            "_": "OK",
+            "id": "feedbackInline1",
+            "show-hide": "show",
+            "outcome-identifier": "FEEDBACK",
+            "identifier": "Correct"
+          }
+        },
+        {
+          "class": "",
+          "qti-feedback-inline": {
+            "_": "Not far off...",
+            "id": "feedbackInline2",
+            "show-hide": "show",
+            "outcome-identifier": "FEEDBACK",
+            "identifier": "Partial"
+          }
+        },
+        {
+          "class": "",
+          "qti-feedback-inline": {
+            "_": "No, but you have the units correct.",
+            "id": "feedbackInline3",
+            "show-hide": "show",
+            "outcome-identifier": "FEEDBACK",
+            "identifier": "Incorrect"
+          }
+        },
+        {
+          "class": "",
+          "qti-feedback-inline": {
+            "_": "OK, but the units are incorrect",
+            "id": "feedbackInline4",
+            "show-hide": "show",
+            "outcome-identifier": "FEEDBACK",
+            "identifier": "OKNoUnits"
+          }
+        },
+        {
+          "class": "",
+          "qti-feedback-inline": {
+            "_": "Not far off, but the units are incorrect",
+            "id": "feedbackInline5",
+            "show-hide": "show",
+            "outcome-identifier": "FEEDBACK",
+            "identifier": "PartialNoUnits"
+          }
+        },
+        {
+          "class": "",
+          "qti-feedback-inline": {
+            "_": "Incorrect, and the units are incorrect",
+            "id": "feedbackInline6",
+            "show-hide": "show",
+            "outcome-identifier": "FEEDBACK",
+            "identifier": "IncorrectNoUnits"
+          }
+        }
+      ]
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-is-null": {
+            "qti-variable": {
+              "identifier": "RESPONSE1"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-response-condition": {
+            "qti-response-if": {
+              "qti-equal": {
+                "tolerance-mode": "absolute",
+                "tolerance": "0.01",
+                "qti-variable": [
+                  {
+                    "identifier": "RESPONSE1"
+                  },
+                  {
+                    "identifier": "fAns"
+                  }
+                ]
+              },
+              "qti-response-condition": {
+                "qti-response-if": {
+                  "qti-or": {
+                    "qti-match": [
+                      {
+                        "qti-variable": {
+                          "identifier": "RESPONSE2"
+                        },
+                        "qti-base-value": {
+                          "_": "cm",
+                          "base-type": "string"
+                        }
+                      },
+                      {
+                        "qti-variable": {
+                          "identifier": "RESPONSE2"
+                        },
+                        "qti-base-value": {
+                          "_": "cms",
+                          "base-type": "string"
+                        }
+                      }
+                    ]
+                  },
+                  "qti-set-outcome-value": [
+                    {
+                      "identifier": "FEEDBACK",
+                      "qti-base-value": {
+                        "_": "Correct",
+                        "base-type": "identifier"
+                      }
+                    },
+                    {
+                      "identifier": "SCORE",
+                      "qti-base-value": {
+                        "_": "10.0",
+                        "base-type": "float"
+                      }
+                    }
+                  ]
+                },
+                "qti-response-else": {
+                  "qti-set-outcome-value": [
+                    {
+                      "identifier": "FEEDBACK",
+                      "qti-base-value": {
+                        "_": "OKNoUnits",
+                        "base-type": "identifier"
+                      }
+                    },
+                    {
+                      "identifier": "SCORE",
+                      "qti-base-value": {
+                        "_": "9.0",
+                        "base-type": "float"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "qti-response-else-if": {
+              "qti-equal": {
+                "tolerance-mode": "absolute",
+                "tolerance": "0.05",
+                "qti-variable": [
+                  {
+                    "identifier": "RESPONSE1"
+                  },
+                  {
+                    "identifier": "fAns"
+                  }
+                ]
+              },
+              "qti-response-condition": {
+                "qti-response-if": {
+                  "qti-or": {
+                    "qti-match": [
+                      {
+                        "qti-variable": {
+                          "identifier": "RESPONSE2"
+                        },
+                        "qti-base-value": {
+                          "_": "cm",
+                          "base-type": "string"
+                        }
+                      },
+                      {
+                        "qti-variable": {
+                          "identifier": "RESPONSE2"
+                        },
+                        "qti-base-value": {
+                          "_": "cms",
+                          "base-type": "string"
+                        }
+                      }
+                    ]
+                  },
+                  "qti-set-outcome-value": [
+                    {
+                      "identifier": "FEEDBACK",
+                      "qti-base-value": {
+                        "_": "Partial",
+                        "base-type": "identifier"
+                      }
+                    },
+                    {
+                      "identifier": "SCORE",
+                      "qti-base-value": {
+                        "_": "5.0",
+                        "base-type": "float"
+                      }
+                    }
+                  ]
+                },
+                "qti-response-else": {
+                  "qti-set-outcome-value": [
+                    {
+                      "identifier": "FEEDBACK",
+                      "qti-base-value": {
+                        "_": "PartialNoUnits",
+                        "base-type": "identifier"
+                      }
+                    },
+                    {
+                      "identifier": "SCORE",
+                      "qti-base-value": {
+                        "_": "4.0",
+                        "base-type": "float"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "qti-response-else": {
+              "qti-response-condition": {
+                "qti-response-if": {
+                  "qti-or": {
+                    "qti-match": [
+                      {
+                        "qti-variable": {
+                          "identifier": "RESPONSE2"
+                        },
+                        "qti-base-value": {
+                          "_": "cm",
+                          "base-type": "string"
+                        }
+                      },
+                      {
+                        "qti-variable": {
+                          "identifier": "RESPONSE2"
+                        },
+                        "qti-base-value": {
+                          "_": "cms",
+                          "base-type": "string"
+                        }
+                      }
+                    ]
+                  },
+                  "qti-set-outcome-value": [
+                    {
+                      "identifier": "FEEDBACK",
+                      "qti-base-value": {
+                        "_": "Incorrect",
+                        "base-type": "identifier"
+                      }
+                    },
+                    {
+                      "identifier": "SCORE",
+                      "qti-base-value": {
+                        "_": "1.0",
+                        "base-type": "float"
+                      }
+                    }
+                  ]
+                },
+                "qti-response-else": {
+                  "qti-set-outcome-value": [
+                    {
+                      "identifier": "FEEDBACK",
+                      "qti-base-value": {
+                        "_": "IncorrectNoUnits",
+                        "base-type": "identifier"
+                      }
+                    },
+                    {
+                      "identifier": "SCORE",
+                      "qti-base-value": {
+                        "_": "0.0",
+                        "base-type": "float"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "completionStatus",
+            "qti-base-value": {
+              "_": "completed",
+              "base-type": "identifier"
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.720Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.720Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4cfe"
+  },
+  "identifier": "ShortAnswer-extText-postcard",
+  "title": "Writing a Postcard - again",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "ShortAnswer-extText-postcard",
+    "title": "Writing a Postcard - again",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "single",
+      "base-type": "string"
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float"
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "p": [
+        "Read this postcard from your English pen-friend, Sam.",
+        {
+          "_": "Here is a sample response:",
+          "br": ""
+        },
+        {
+          "_": "\"Ours is a small town. There are nice trees and some old buildings. Does it really\r\n\t\t\tmatter where I go in the evenings?\"",
+          "br": ""
+        }
+      ],
+      "div": {
+        "blockquote": {
+          "class": "postcard",
+          "p": {
+            "_": "Here is a postcard of my town. Please send me a postcard from your\r\n\t\t\t\t\ttown. What size is your town? What is the nicest part of your town?\r\n\t\t\t\t\tWhere do you go in the evenings? Sam.",
+            "br": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        }
+      },
+      "qti-extended-text-interaction": {
+        "response-identifier": "RESPONSE",
+        "expected-length": "200",
+        "expected-lines": "3",
+        "qti-prompt": {
+          "_": "Write Sam a postcard. Answer the questions. Write 25-35 words.",
+          "br": ""
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.721Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.721Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4cff"
+  },
+  "identifier": "matching-associate-trigDeriv",
+  "title": "Associate derivatives of trigonometric functions",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "matching-associate-trigDeriv",
+    "title": "Associate derivatives of trigonometric functions",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "multiple",
+      "base-type": "pair",
+      "qti-correct-response": {
+        "qti-value": [
+          "A D",
+          "B E",
+          "C F"
+        ]
+      },
+      "qti-mapping": {
+        "default-value": "0",
+        "qti-map-entry": [
+          {
+            "map-key": "A D",
+            "mapped-value": "1"
+          },
+          {
+            "map-key": "B E",
+            "mapped-value": "1"
+          },
+          {
+            "map-key": "C F",
+            "mapped-value": "2"
+          }
+        ]
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float"
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "p": [
+        "Which expressions in the table below are equivalent?",
+        {
+          "qti-feedback-inline": [
+            {
+              "_": "Yes,\r\n\t\t\t\tthat's correct.",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "OK"
+            },
+            {
+              "_": "No, that's\r\n\t\t\t\tnot correct.",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "No"
+            }
+          ]
+        }
+      ],
+      "qti-associate-interaction": {
+        "response-identifier": "RESPONSE",
+        "shuffle": "true",
+        "max-associations": "3",
+        "qti-prompt": "Match the expressions:",
+        "qti-simple-associable-choice": [
+          {
+            "identifier": "A",
+            "match-max": "1",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "semantics": {
+                "mrow": {
+                  "mfrac": {
+                    "mi": "d",
+                    "mrow": {
+                      "mi": [
+                        "d",
+                        "Θ"
+                      ]
+                    }
+                  },
+                  "mfenced": {
+                    "close": ")",
+                    "open": "(",
+                    "mrow": {
+                      "mi": [
+                        "sin",
+                        "Θ"
+                      ]
+                    }
+                  }
+                },
+                "annotation": {
+                  "_": "\\[ \\frac{d}{d\\theta}(\\sin{\\theta})\r\n\t\t\t\t\t\t\t\\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          },
+          {
+            "identifier": "B",
+            "match-max": "1",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "semantics": {
+                "mrow": {
+                  "mfrac": {
+                    "mi": "d",
+                    "mrow": {
+                      "mi": [
+                        "d",
+                        "Θ"
+                      ]
+                    }
+                  },
+                  "mfenced": {
+                    "close": ")",
+                    "open": "(",
+                    "mrow": {
+                      "mi": [
+                        "cos",
+                        "Θ"
+                      ]
+                    }
+                  }
+                },
+                "annotation": {
+                  "_": "\\[ \\frac{d}{d\\theta}(\\cos{\\theta})\r\n\t\t\t\t\t\t\t\\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          },
+          {
+            "identifier": "C",
+            "match-max": "1",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "semantics": {
+                "mrow": {
+                  "mfrac": {
+                    "mi": "d",
+                    "mrow": {
+                      "mi": [
+                        "d",
+                        "Θ"
+                      ]
+                    }
+                  },
+                  "mfenced": {
+                    "close": ")",
+                    "open": "(",
+                    "mrow": {
+                      "mi": [
+                        "tan",
+                        "Θ"
+                      ]
+                    }
+                  }
+                },
+                "annotation": {
+                  "_": "\\[ \\frac{d}{d\\theta}(\\tan{\\theta})\r\n\t\t\t\t\t\t\t\\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          },
+          {
+            "identifier": "D",
+            "match-max": "1",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "semantics": {
+                "mrow": {
+                  "mi": [
+                    "cos",
+                    "Θ"
+                  ]
+                },
+                "annotation": {
+                  "_": "\\[ \\cos{\\theta} \\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          },
+          {
+            "identifier": "E",
+            "match-max": "1",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "semantics": {
+                "mrow": {
+                  "mo": "-",
+                  "mi": [
+                    "sin",
+                    "Θ"
+                  ]
+                },
+                "annotation": {
+                  "_": "\\[ -\\sin{\\theta} \\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          },
+          {
+            "identifier": "F",
+            "match-max": "1",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "semantics": {
+                "mrow": {
+                  "msup": {
+                    "mi": "sec",
+                    "mn": "2"
+                  },
+                  "mi": "Θ"
+                },
+                "annotation": {
+                  "_": "\\[ \\sec^2{\\theta} \\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-is-null": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0.0",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-map-response": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-response-condition": {
+            "qti-response-if": {
+              "qti-equal": {
+                "tolerance-mode": "exact",
+                "qti-variable": {
+                  "identifier": "SCORE"
+                },
+                "qti-base-value": {
+                  "_": "4.0",
+                  "base-type": "float"
+                }
+              },
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "OK",
+                  "base-type": "identifier"
+                }
+              }
+            },
+            "qti-response-else": {
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "No",
+                  "base-type": "identifier"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.723Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.723Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d00"
+  },
+  "identifier": "Likert-match-questionSet",
+  "title": "Question set",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "Likert-match-questionSet",
+    "title": "Question set",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "multiple",
+      "base-type": "directedPair",
+      "qti-correct-response": {
+        "qti-value": "SA Q1"
+      },
+      "qti-mapping": {
+        "default-value": "0",
+        "qti-map-entry": {
+          "map-key": "SA Q1",
+          "mapped-value": "2"
+        }
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float"
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "qti-match-interaction": {
+        "response-identifier": "RESPONSE",
+        "shuffle": "false",
+        "max-associations": "3",
+        "qti-prompt": " ",
+        "qti-simple-match-set": [
+          {
+            "qti-simple-associable-choice": [
+              {
+                "_": "Strongly Agree",
+                "identifier": "SA",
+                "match-max": "1"
+              },
+              {
+                "_": "Agree",
+                "identifier": "A",
+                "match-max": "1"
+              },
+              {
+                "_": "Neither Agree nor Disagree",
+                "identifier": "NAD",
+                "match-max": "1"
+              },
+              {
+                "_": "Disagree",
+                "identifier": "D",
+                "match-max": "1"
+              },
+              {
+                "_": "Strongly Disagree",
+                "identifier": "SD",
+                "match-max": "1"
+              },
+              {
+                "_": "Not Applicable",
+                "identifier": "NA",
+                "match-max": "1"
+              }
+            ]
+          },
+          {
+            "qti-simple-associable-choice": {
+              "_": "This set of questions covers the capabilities of the main LMSs.",
+              "identifier": "Q1",
+              "match-max": "1"
+            }
+          }
+        ]
+      },
+      "p": {
+        "qti-feedback-inline": [
+          {
+            "_": "Yes, that's the intention :)",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "OK"
+          },
+          {
+            "_": "Oh, that's a pity, we hoped you would Strongly Agree :(",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "No"
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-is-null": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0.0",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-map-response": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-response-condition": {
+            "qti-response-if": {
+              "qti-equal": {
+                "tolerance-mode": "exact",
+                "qti-variable": {
+                  "identifier": "SCORE"
+                },
+                "qti-base-value": {
+                  "_": "2.0",
+                  "base-type": "float"
+                }
+              },
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "OK",
+                  "base-type": "identifier"
+                }
+              }
+            },
+            "qti-response-else": {
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "No",
+                  "base-type": "identifier"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.724Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.724Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d01"
+  },
+  "identifier": "MultipleChoice-choice-polynomials",
+  "title": "Identifying polynomials",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "MultipleChoice-choice-polynomials",
+    "title": "Identifying polynomials",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "single",
+      "base-type": "identifier",
+      "qti-correct-response": {
+        "qti-value": "ChoiceA"
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float",
+        "normal-maximum": "2",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "p": [
+        "Which of the following is not a polynomial?",
+        {
+          "qti-feedback-inline": [
+            {
+              "_": "Yes, that's correct.",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "OK"
+            },
+            {
+              "_": "No, that's not correct.",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "No"
+            }
+          ]
+        }
+      ],
+      "qti-choice-interaction": {
+        "response-identifier": "RESPONSE",
+        "shuffle": "true",
+        "max-choices": "1",
+        "qti-prompt": " ",
+        "qti-simple-choice": [
+          {
+            "identifier": "ChoiceA",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "display": "block",
+              "semantics": {
+                "mrow": {
+                  "msup": {
+                    "mi": "sec",
+                    "mn": "2"
+                  },
+                  "mi": "Θ"
+                },
+                "annotation": {
+                  "_": "\\[ \\sec^2{\\theta} \\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          },
+          {
+            "identifier": "ChoiceB",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "display": "block",
+              "semantics": {
+                "mrow": {
+                  "mi": [
+                    "x",
+                    "y"
+                  ],
+                  "mo": "+",
+                  "mn": "1001"
+                },
+                "annotation": {
+                  "_": "\\[ x+1001y \\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          },
+          {
+            "identifier": "ChoiceC",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "display": "block",
+              "semantics": {
+                "mrow": {
+                  "msup": {
+                    "mi": "x",
+                    "mn": "3"
+                  },
+                  "mo": [
+                    "-",
+                    "+"
+                  ],
+                  "mn": [
+                    "5",
+                    "87"
+                  ],
+                  "mi": "x"
+                },
+                "annotation": {
+                  "_": "\\[ x^3-5x+87 \\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          },
+          {
+            "identifier": "ChoiceD",
+            "math": {
+              "xmlns": "http://www.w3.org/1998/Math/MathML",
+              "display": "block",
+              "semantics": {
+                "mrow": {
+                  "mn": "1",
+                  "mo": "-",
+                  "msup": {
+                    "mi": "ζ",
+                    "mn": "2"
+                  }
+                },
+                "annotation": {
+                  "_": "\\[ 1-\\zeta^2 \\]",
+                  "encoding": "SnuggleTeX"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-is-null": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0.0",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-response-condition": {
+            "qti-response-if": {
+              "qti-match": {
+                "qti-variable": {
+                  "identifier": "RESPONSE"
+                },
+                "qti-correct": {
+                  "identifier": "RESPONSE"
+                }
+              },
+              "qti-set-outcome-value": [
+                {
+                  "identifier": "SCORE",
+                  "qti-base-value": {
+                    "_": "2.0",
+                    "base-type": "float"
+                  }
+                },
+                {
+                  "identifier": "FEEDBACK",
+                  "qti-base-value": {
+                    "_": "OK",
+                    "base-type": "identifier"
+                  }
+                }
+              ]
+            },
+            "qti-response-else": {
+              "qti-set-outcome-value": [
+                {
+                  "identifier": "SCORE",
+                  "qti-base-value": {
+                    "_": "0.0",
+                    "base-type": "float"
+                  }
+                },
+                {
+                  "identifier": "FEEDBACK",
+                  "qti-base-value": {
+                    "_": "No",
+                    "base-type": "identifier"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.726Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.726Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d02"
+  },
+  "identifier": "jumble-inlineChoice",
+  "title": "Jumble: Legend - inlineChoice",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "xmlns:xi": "http://www.w3.org/2001/XInclude",
+    "xmlns:m": "http://www.w3.org/1998/Math/MathML",
+    "tool-name": "Mathqurate",
+    "tool-version": "1.0",
+    "xml:lang": "en",
+    "identifier": "jumble-inlineChoice",
+    "title": "Jumble: Legend - inlineChoice",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": [
+      {
+        "identifier": "RESPONSE1",
+        "cardinality": "single",
+        "base-type": "identifier",
+        "qti-correct-response": {
+          "qti-value": "F1"
+        }
+      },
+      {
+        "identifier": "RESPONSE2",
+        "cardinality": "single",
+        "base-type": "identifier",
+        "qti-correct-response": {
+          "qti-value": "C2"
+        }
+      },
+      {
+        "identifier": "RESPONSE3",
+        "cardinality": "single",
+        "base-type": "identifier",
+        "qti-correct-response": {
+          "qti-value": "H3"
+        }
+      }
+    ],
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "SCORE1",
+        "cardinality": "single",
+        "base-type": "float",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "SCORE2",
+        "cardinality": "single",
+        "base-type": "float",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "SCORE3",
+        "cardinality": "single",
+        "base-type": "float",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "div": {
+        "blockquote": {
+          "p": {
+            "_": "The bandit killed her  and burned her , \r\n                    then jumped on her  and rode away.",
+            "qti-inline-choice-interaction": [
+              {
+                "response-identifier": "RESPONSE1",
+                "shuffle": "true",
+                "qti-inline-choice": [
+                  {
+                    "_": "castle",
+                    "identifier": "C1"
+                  },
+                  {
+                    "_": "family",
+                    "identifier": "F1"
+                  },
+                  {
+                    "_": "horse",
+                    "identifier": "H1"
+                  },
+                  {
+                    "_": "sword",
+                    "identifier": "S1"
+                  }
+                ]
+              },
+              {
+                "response-identifier": "RESPONSE2",
+                "shuffle": "true",
+                "qti-inline-choice": [
+                  {
+                    "_": "castle",
+                    "identifier": "C2"
+                  },
+                  {
+                    "_": "family",
+                    "identifier": "F2"
+                  },
+                  {
+                    "_": "horse",
+                    "identifier": "H2"
+                  },
+                  {
+                    "_": "sword",
+                    "identifier": "S2"
+                  }
+                ]
+              },
+              {
+                "response-identifier": "RESPONSE3",
+                "shuffle": "true",
+                "qti-inline-choice": [
+                  {
+                    "_": "castle",
+                    "identifier": "C3"
+                  },
+                  {
+                    "_": "family",
+                    "identifier": "F3"
+                  },
+                  {
+                    "_": "horse",
+                    "identifier": "H3"
+                  },
+                  {
+                    "_": "sword",
+                    "identifier": "S3"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "p": {
+        "qti-feedback-inline": [
+          {
+            "_": "Yes, that's what he did.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "OK"
+          },
+          {
+            "_": "No, that's not what he did.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "No"
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": [
+        {
+          "qti-response-if": {
+            "qti-match": {
+              "qti-variable": {
+                "identifier": "RESPONSE1"
+              },
+              "qti-correct": {
+                "identifier": "RESPONSE1"
+              }
+            },
+            "qti-set-outcome-value": {
+              "identifier": "SCORE1",
+              "qti-base-value": {
+                "_": "1.0",
+                "base-type": "float"
+              }
+            }
+          },
+          "qti-response-else": {
+            "qti-set-outcome-value": {
+              "identifier": "SCORE1",
+              "qti-base-value": {
+                "_": "0.0",
+                "base-type": "float"
+              }
+            }
+          }
+        },
+        {
+          "qti-response-if": {
+            "qti-match": {
+              "qti-variable": {
+                "identifier": "RESPONSE2"
+              },
+              "qti-correct": {
+                "identifier": "RESPONSE2"
+              }
+            },
+            "qti-set-outcome-value": {
+              "identifier": "SCORE2",
+              "qti-base-value": {
+                "_": "1.0",
+                "base-type": "float"
+              }
+            }
+          },
+          "qti-response-else": {
+            "qti-set-outcome-value": {
+              "identifier": "SCORE2",
+              "qti-base-value": {
+                "_": "0.0",
+                "base-type": "float"
+              }
+            }
+          }
+        },
+        {
+          "qti-response-if": {
+            "qti-match": {
+              "qti-variable": {
+                "identifier": "RESPONSE3"
+              },
+              "qti-correct": {
+                "identifier": "RESPONSE3"
+              }
+            },
+            "qti-set-outcome-value": {
+              "identifier": "SCORE3",
+              "qti-base-value": {
+                "_": "1.0",
+                "base-type": "float"
+              }
+            }
+          },
+          "qti-response-else": {
+            "qti-set-outcome-value": {
+              "identifier": "SCORE3",
+              "qti-base-value": {
+                "_": "0.0",
+                "base-type": "float"
+              }
+            }
+          }
+        },
+        {
+          "qti-response-if": {
+            "qti-equal": {
+              "tolerance-mode": "exact",
+              "qti-variable": {
+                "identifier": "SCORE"
+              },
+              "qti-base-value": {
+                "_": "3.0",
+                "base-type": "float"
+              }
+            },
+            "qti-set-outcome-value": {
+              "identifier": "FEEDBACK",
+              "qti-base-value": {
+                "_": "OK",
+                "base-type": "identifier"
+              }
+            }
+          },
+          "qti-response-else": {
+            "qti-set-outcome-value": {
+              "identifier": "FEEDBACK",
+              "qti-base-value": {
+                "_": "No",
+                "base-type": "identifier"
+              }
+            }
+          }
+        }
+      ],
+      "qti-set-outcome-value": {
+        "identifier": "SCORE",
+        "qti-sum": {
+          "qti-variable": [
+            {
+              "identifier": "SCORE1"
+            },
+            {
+              "identifier": "SCORE2"
+            },
+            {
+              "identifier": "SCORE3"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.728Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.728Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d03"
+  },
+  "identifier": "MultipleAnswer-choice-materials",
+  "title": "Applications of materials",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "MultipleAnswer-choice-materials",
+    "title": "Applications of materials",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "multiple",
+      "base-type": "identifier",
+      "qti-correct-response": {
+        "qti-value": [
+          "A",
+          "I"
+        ]
+      },
+      "qti-mapping": {
+        "lower-bound": "0",
+        "upper-bound": "2",
+        "default-value": "0",
+        "qti-map-entry": [
+          {
+            "map-key": "A",
+            "mapped-value": "1"
+          },
+          {
+            "map-key": "I",
+            "mapped-value": "1"
+          }
+        ]
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float",
+        "normal-maximum": "2.0"
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "qti-choice-interaction": {
+        "response-identifier": "RESPONSE",
+        "shuffle": "true",
+        "max-choices": "0",
+        "qti-prompt": "Select the application(s) for which aluminium alloy is most suitable:",
+        "qti-simple-choice": [
+          {
+            "_": "Aircraft",
+            "identifier": "A",
+            "fixed": "false"
+          },
+          {
+            "_": "Irrigation pipes",
+            "identifier": "I",
+            "fixed": "false"
+          },
+          {
+            "_": "Cultivator tines",
+            "identifier": "C",
+            "fixed": "false"
+          },
+          {
+            "_": "Racing cars",
+            "identifier": "R",
+            "fixed": "false"
+          }
+        ]
+      },
+      "p": {
+        "qti-feedback-inline": [
+          {
+            "_": "Yes, that's correct.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "OK"
+          },
+          {
+            "_": "No, that's not correct.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "No"
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-is-null": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0.0",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-map-response": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-response-condition": {
+            "qti-response-if": {
+              "qti-equal": {
+                "tolerance-mode": "exact",
+                "qti-variable": {
+                  "identifier": "SCORE"
+                },
+                "qti-base-value": {
+                  "_": "2.0",
+                  "base-type": "float"
+                }
+              },
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "OK",
+                  "base-type": "identifier"
+                }
+              }
+            },
+            "qti-response-else": {
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "No",
+                  "base-type": "identifier"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.729Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.729Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d04"
+  },
+  "identifier": "either-or-choice-root2",
+  "title": "Either/Or question about root 2",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "either-or-choice-root2",
+    "title": "Either/Or question about root 2",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "single",
+      "base-type": "identifier",
+      "qti-correct-response": {
+        "qti-value": "ChoiceB"
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float",
+        "normal-maximum": "1.0",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "div": {
+        "math": {
+          "xmlns": "http://www.w3.org/1998/Math/MathML",
+          "display": "block",
+          "semantics": {
+            "mrow": {
+              "msqrt": {
+                "mn": "2"
+              },
+              "mo": ">",
+              "mn": "2"
+            },
+            "annotation": {
+              "_": "\\[ \\sqrt{2}>2 \\]",
+              "encoding": "SnuggleTeX"
+            }
+          }
+        }
+      },
+      "qti-choice-interaction": {
+        "response-identifier": "RESPONSE",
+        "shuffle": "false",
+        "max-choices": "1",
+        "qti-prompt": "Is this right or wrong?",
+        "qti-simple-choice": [
+          {
+            "_": "Right",
+            "identifier": "ChoiceA",
+            "qti-feedback-inline": {
+              "_": "No,",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "ChoiceA",
+              "math": {
+                "xmlns": "http://www.w3.org/1998/Math/MathML",
+                "semantics": {
+                  "mrow": {
+                    "msqrt": {
+                      "mn": "2"
+                    },
+                    "mo": "<",
+                    "mn": "2"
+                  },
+                  "annotation": {
+                    "_": "\\[ \\sqrt{2}<2 \\]",
+                    "encoding": "SnuggleTeX"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "_": "Wrong",
+            "identifier": "ChoiceB",
+            "qti-feedback-inline": {
+              "_": "That's right,",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "ChoiceB",
+              "math": {
+                "xmlns": "http://www.w3.org/1998/Math/MathML",
+                "semantics": {
+                  "mrow": {
+                    "msqrt": {
+                      "mn": "2"
+                    },
+                    "mo": "<",
+                    "mn": "2"
+                  },
+                  "annotation": {
+                    "_": "\\[ \\sqrt{2}<2 \\]",
+                    "encoding": "SnuggleTeX"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-match": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            },
+            "qti-correct": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "1",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0",
+              "base-type": "float"
+            }
+          }
+        }
+      },
+      "qti-set-outcome-value": {
+        "identifier": "FEEDBACK",
+        "qti-variable": {
+          "identifier": "RESPONSE"
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.730Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.730Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d05"
+  },
+  "identifier": "essay-vacation",
+  "title": "What we did in the vacation",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "essay-vacation",
+    "title": "What we did in the vacation",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "single",
+      "base-type": "string"
+    },
+    "qti-outcome-declaration": {
+      "identifier": "SCORE",
+      "cardinality": "single",
+      "base-type": "float",
+      "normal-maximum": "20.0"
+    },
+    "qti-item-body": {
+      "p": [
+        "Write a few lines about what you did during the vacation.",
+        "Here is a sample response:"
+      ],
+      "qti-extended-text-interaction": {
+        "response-identifier": "RESPONSE",
+        "expected-length": "200",
+        "qti-prompt": "Write 20-50 words."
+      },
+      "blockquote": {
+        "p": [
+          "We went to Wales for our holiday. We stayed in a cottage on a hill.",
+          "Whie we were there, we rode on a small train, climbed a mountain and walked on a beach."
+        ]
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.731Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.731Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d06"
+  },
+  "identifier": "Likert-choice-questionSet",
+  "title": "Question set",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "Likert-choice-questionSet",
+    "title": "Question set",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "single",
+      "base-type": "identifier",
+      "qti-correct-response": {
+        "qti-value": "ChoiceA"
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float",
+        "normal-maximum": "2",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "p": [
+        "This set of questions covers the capabilities of the main LMSs.",
+        {
+          "qti-feedback-inline": [
+            {
+              "_": "Yes, that's the intention :)",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "OK"
+            },
+            {
+              "_": "Oh, that's a pity, we hoped you would Strongly Agree :(",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "No"
+            }
+          ]
+        }
+      ],
+      "qti-choice-interaction": {
+        "response-identifier": "RESPONSE",
+        "shuffle": "false",
+        "max-choices": "1",
+        "qti-prompt": " ",
+        "qti-simple-choice": [
+          {
+            "_": "Strongly Agree",
+            "identifier": "ChoiceA"
+          },
+          {
+            "_": "Agree",
+            "identifier": "ChoiceB"
+          },
+          {
+            "_": "Neither Agree nor Disagree",
+            "identifier": "ChoiceC"
+          },
+          {
+            "_": "Disagree",
+            "identifier": "ChoiceD"
+          },
+          {
+            "_": "Strongly Disagree",
+            "identifier": "ChoiceE"
+          },
+          {
+            "_": "Not Applicable",
+            "identifier": "ChoiceF"
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-is-null": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0.0",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-response-condition": {
+            "qti-response-if": {
+              "qti-match": {
+                "qti-variable": {
+                  "identifier": "RESPONSE"
+                },
+                "qti-correct": {
+                  "identifier": "RESPONSE"
+                }
+              },
+              "qti-set-outcome-value": [
+                {
+                  "identifier": "SCORE",
+                  "qti-base-value": {
+                    "_": "2.0",
+                    "base-type": "float"
+                  }
+                },
+                {
+                  "identifier": "FEEDBACK",
+                  "qti-base-value": {
+                    "_": "OK",
+                    "base-type": "identifier"
+                  }
+                }
+              ]
+            },
+            "qti-response-else": {
+              "qti-set-outcome-value": [
+                {
+                  "identifier": "SCORE",
+                  "qti-base-value": {
+                    "_": "0.0",
+                    "base-type": "float"
+                  }
+                },
+                {
+                  "identifier": "FEEDBACK",
+                  "qti-base-value": {
+                    "_": "No",
+                    "base-type": "identifier"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.733Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.733Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d07"
+  },
+  "identifier": "matching-match-trigDeriv",
+  "title": "Match derivatives of trigonometric functions",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "matching-match-trigDeriv",
+    "title": "Match derivatives of trigonometric functions",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "multiple",
+      "base-type": "directedPair",
+      "qti-correct-response": {
+        "qti-value": [
+          "A D",
+          "B E",
+          "C F"
+        ]
+      },
+      "qti-mapping": {
+        "default-value": "0",
+        "qti-map-entry": [
+          {
+            "map-key": "A D",
+            "mapped-value": "1"
+          },
+          {
+            "map-key": "B E",
+            "mapped-value": "1"
+          },
+          {
+            "map-key": "C F",
+            "mapped-value": "2"
+          }
+        ]
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float"
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "p": [
+        "Which expressions in the table below are equivalent?",
+        {
+          "qti-feedback-inline": [
+            {
+              "_": "Yes,\r\n\t\t\t\tthat's correct.",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "OK"
+            },
+            {
+              "_": "No, that's\r\n\t\t\t\tnot correct.",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "No"
+            }
+          ]
+        }
+      ],
+      "qti-match-interaction": {
+        "response-identifier": "RESPONSE",
+        "shuffle": "true",
+        "max-associations": "3",
+        "qti-prompt": "Match the expressions:",
+        "qti-simple-match-set": [
+          {
+            "qti-simple-associable-choice": [
+              {
+                "identifier": "A",
+                "match-max": "1",
+                "math": {
+                  "xmlns": "http://www.w3.org/1998/Math/MathML",
+                  "semantics": {
+                    "mrow": {
+                      "mfrac": {
+                        "mi": "d",
+                        "mrow": {
+                          "mi": [
+                            "d",
+                            "Θ"
+                          ]
+                        }
+                      },
+                      "mfenced": {
+                        "close": ")",
+                        "open": "(",
+                        "mrow": {
+                          "mi": [
+                            "sin",
+                            "Θ"
+                          ]
+                        }
+                      }
+                    },
+                    "annotation": {
+                      "_": "\\[ \\frac{d}{d\\theta}(\\sin{\\theta})\r\n\t\t\t\t\t\t\t\t\\]",
+                      "encoding": "SnuggleTeX"
+                    }
+                  }
+                }
+              },
+              {
+                "identifier": "B",
+                "match-max": "1",
+                "math": {
+                  "xmlns": "http://www.w3.org/1998/Math/MathML",
+                  "semantics": {
+                    "mrow": {
+                      "mfrac": {
+                        "mi": "d",
+                        "mrow": {
+                          "mi": [
+                            "d",
+                            "Θ"
+                          ]
+                        }
+                      },
+                      "mfenced": {
+                        "close": ")",
+                        "open": "(",
+                        "mrow": {
+                          "mi": [
+                            "cos",
+                            "Θ"
+                          ]
+                        }
+                      }
+                    },
+                    "annotation": {
+                      "_": "\\[ \\frac{d}{d\\theta}(\\cos{\\theta})\r\n\t\t\t\t\t\t\t\t\\]",
+                      "encoding": "SnuggleTeX"
+                    }
+                  }
+                }
+              },
+              {
+                "identifier": "C",
+                "match-max": "1",
+                "math": {
+                  "xmlns": "http://www.w3.org/1998/Math/MathML",
+                  "semantics": {
+                    "mrow": {
+                      "mfrac": {
+                        "mi": "d",
+                        "mrow": {
+                          "mi": [
+                            "d",
+                            "Θ"
+                          ]
+                        }
+                      },
+                      "mfenced": {
+                        "close": ")",
+                        "open": "(",
+                        "mrow": {
+                          "mi": [
+                            "tan",
+                            "Θ"
+                          ]
+                        }
+                      }
+                    },
+                    "annotation": {
+                      "_": "\\[ \\frac{d}{d\\theta}(\\tan{\\theta})\r\n\t\t\t\t\t\t\t\t\\]",
+                      "encoding": "SnuggleTeX"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "qti-simple-associable-choice": [
+              {
+                "identifier": "D",
+                "match-max": "3",
+                "math": {
+                  "xmlns": "http://www.w3.org/1998/Math/MathML",
+                  "semantics": {
+                    "mrow": {
+                      "mi": [
+                        "cos",
+                        "Θ"
+                      ]
+                    },
+                    "annotation": {
+                      "_": "\\[ \\cos{\\theta} \\]",
+                      "encoding": "SnuggleTeX"
+                    }
+                  }
+                }
+              },
+              {
+                "identifier": "E",
+                "match-max": "3",
+                "math": {
+                  "xmlns": "http://www.w3.org/1998/Math/MathML",
+                  "semantics": {
+                    "mrow": {
+                      "mo": "-",
+                      "mi": [
+                        "sin",
+                        "Θ"
+                      ]
+                    },
+                    "annotation": {
+                      "_": "\\[ -\\sin{\\theta} \\]",
+                      "encoding": "SnuggleTeX"
+                    }
+                  }
+                }
+              },
+              {
+                "identifier": "F",
+                "match-max": "3",
+                "math": {
+                  "xmlns": "http://www.w3.org/1998/Math/MathML",
+                  "semantics": {
+                    "mrow": {
+                      "msup": {
+                        "mi": "sec",
+                        "mn": "2"
+                      },
+                      "mi": "Θ"
+                    },
+                    "annotation": {
+                      "_": "\\[ \\sec^2{\\theta} \\]",
+                      "encoding": "SnuggleTeX"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-is-null": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0.0",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-map-response": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-response-condition": {
+            "qti-response-if": {
+              "qti-equal": {
+                "tolerance-mode": "exact",
+                "qti-variable": {
+                  "identifier": "SCORE"
+                },
+                "qti-base-value": {
+                  "_": "4.0",
+                  "base-type": "float"
+                }
+              },
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "OK",
+                  "base-type": "identifier"
+                }
+              }
+            },
+            "qti-response-else": {
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "No",
+                  "base-type": "identifier"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.734Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.734Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d08"
+  },
+  "identifier": "QuizBowl-multi-geometry",
+  "title": "What sort of triangle",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "xmlns:xi": "http://www.w3.org/2001/XInclude",
+    "xmlns:m": "http://www.w3.org/1998/Math/MathML",
+    "tool-name": "Mathqurate",
+    "tool-version": "1.0",
+    "xml:lang": "en",
+    "identifier": "QuizBowl-multi-geometry",
+    "title": "What sort of triangle",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": [
+      {
+        "identifier": "RESPONSE1",
+        "cardinality": "single",
+        "base-type": "identifier"
+      },
+      {
+        "identifier": "RESPONSE2",
+        "cardinality": "single",
+        "base-type": "string"
+      }
+    ],
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "SCORE1",
+        "cardinality": "single",
+        "base-type": "float",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "SCORE2",
+        "cardinality": "single",
+        "base-type": "float",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      },
+      {
+        "identifier": "Alternatives",
+        "cardinality": "ordered",
+        "base-type": "string",
+        "qti-default-value": {
+          "qti-value": [
+            "equilateral triangle",
+            "isosceles triangle",
+            "equiangular triangle",
+            "triangle"
+          ]
+        }
+      }
+    ],
+    "qti-item-body": {
+      "div": {
+        "p": [
+          "What is the question to which this is the answer?",
+          {
+            "_": "Select the form of question and then enter the rest of the question in the\r\n                box.",
+            "br": ""
+          },
+          {
+            "_": "?",
+            "qti-inline-choice-interaction": {
+              "response-identifier": "RESPONSE1",
+              "shuffle": "true",
+              "qti-inline-choice": [
+                {
+                  "_": "What is",
+                  "identifier": "Q1"
+                },
+                {
+                  "_": "How would you define",
+                  "identifier": "Q2"
+                }
+              ]
+            },
+            "qti-text-entry-interaction": {
+              "response-identifier": "RESPONSE2",
+              "expected-length": "50"
+            }
+          }
+        ],
+        "br": "",
+        "blockquote": {
+          "p": "\"It is a triangle with three equal sides.\""
+        }
+      },
+      "p": {
+        "qti-feedback-inline": [
+          {
+            "_": "Yes,\r\n                that's correct.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "OK"
+          },
+          {
+            "_": "No,\r\n                an isosceles triangle has only two sides equal; if all three sides are equal we say\r\n                it is an equilateral triangle.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "Isosceles"
+          },
+          {
+            "_": "The angles are also equal, but it is called an equilateral\r\n                triangle.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "Equiangular"
+          },
+          {
+            "_": "It\r\n                is a special sort of triangle, called an equilateral triangle.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "Triangle"
+          },
+          {
+            "_": "No, that's\r\n                not correct.",
+            "outcome-identifier": "FEEDBACK",
+            "show-hide": "show",
+            "identifier": "No"
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": [
+        {
+          "qti-response-if": {
+            "qti-match": {
+              "qti-variable": {
+                "identifier": "RESPONSE1"
+              },
+              "qti-base-value": {
+                "_": "Q1",
+                "base-type": "identifier"
+              }
+            },
+            "qti-set-outcome-value": {
+              "identifier": "SCORE1",
+              "qti-base-value": {
+                "_": "1.0",
+                "base-type": "float"
+              }
+            }
+          },
+          "qti-response-else-if": {
+            "qti-match": {
+              "qti-variable": {
+                "identifier": "RESPONSE1"
+              },
+              "qti-base-value": {
+                "_": "Q2",
+                "base-type": "identifier"
+              }
+            },
+            "qti-set-outcome-value": {
+              "identifier": "SCORE1",
+              "qti-base-value": {
+                "_": "1.0",
+                "base-type": "float"
+              }
+            }
+          },
+          "qti-response-else": {
+            "qti-set-outcome-value": {
+              "identifier": "SCORE1",
+              "qti-base-value": {
+                "_": "0.0",
+                "base-type": "float"
+              }
+            }
+          }
+        },
+        {
+          "qti-response-if": {
+            "qti-substring": {
+              "case-sensitive": "false",
+              "qti-index": {
+                "n": "1",
+                "qti-variable": {
+                  "identifier": "Alternatives"
+                }
+              },
+              "qti-variable": {
+                "identifier": "RESPONSE2"
+              }
+            },
+            "qti-set-outcome-value": [
+              {
+                "identifier": "SCORE2",
+                "qti-base-value": {
+                  "_": "1.0",
+                  "base-type": "float"
+                }
+              },
+              {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "OK",
+                  "base-type": "identifier"
+                }
+              }
+            ]
+          },
+          "qti-response-else-if": [
+            {
+              "qti-substring": {
+                "case-sensitive": "false",
+                "qti-index": {
+                  "n": "2",
+                  "qti-variable": {
+                    "identifier": "Alternatives"
+                  }
+                },
+                "qti-variable": {
+                  "identifier": "RESPONSE2"
+                }
+              },
+              "qti-set-outcome-value": [
+                {
+                  "identifier": "SCORE2",
+                  "qti-base-value": {
+                    "_": "0.5",
+                    "base-type": "float"
+                  }
+                },
+                {
+                  "identifier": "FEEDBACK",
+                  "qti-base-value": {
+                    "_": "Isosceles",
+                    "base-type": "identifier"
+                  }
+                }
+              ]
+            },
+            {
+              "qti-substring": {
+                "case-sensitive": "false",
+                "qti-index": {
+                  "n": "3",
+                  "qti-variable": {
+                    "identifier": "Alternatives"
+                  }
+                },
+                "qti-variable": {
+                  "identifier": "RESPONSE2"
+                }
+              },
+              "qti-set-outcome-value": [
+                {
+                  "identifier": "SCORE2",
+                  "qti-base-value": {
+                    "_": "0.5",
+                    "base-type": "float"
+                  }
+                },
+                {
+                  "identifier": "FEEDBACK",
+                  "qti-base-value": {
+                    "_": "Equiangular",
+                    "base-type": "identifier"
+                  }
+                }
+              ]
+            },
+            {
+              "qti-substring": {
+                "case-sensitive": "false",
+                "qti-index": {
+                  "n": "4",
+                  "qti-variable": {
+                    "identifier": "Alternatives"
+                  }
+                },
+                "qti-variable": {
+                  "identifier": "RESPONSE2"
+                }
+              },
+              "qti-set-outcome-value": [
+                {
+                  "identifier": "SCORE2",
+                  "qti-base-value": {
+                    "_": "0.0",
+                    "base-type": "float"
+                  }
+                },
+                {
+                  "identifier": "FEEDBACK",
+                  "qti-base-value": {
+                    "_": "Triangle",
+                    "base-type": "identifier"
+                  }
+                }
+              ]
+            }
+          ],
+          "qti-response-else": {
+            "qti-set-outcome-value": [
+              {
+                "identifier": "SCORE2",
+                "qti-base-value": {
+                  "_": "0.0",
+                  "base-type": "float"
+                }
+              },
+              {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "No",
+                  "base-type": "identifier"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "qti-set-outcome-value": {
+        "identifier": "SCORE",
+        "qti-sum": {
+          "qti-variable": [
+            {
+              "identifier": "SCORE1"
+            },
+            {
+              "identifier": "SCORE2"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.735Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.735Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d09"
+  },
+  "identifier": "TF-choice",
+  "title": "True/false question about geometry",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "TF-choice",
+    "title": "True/false question about geometry",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "single",
+      "base-type": "identifier",
+      "qti-correct-response": {
+        "qti-value": "ChoiceB"
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float",
+        "normal-maximum": "1.0",
+        "qti-default-value": {
+          "qti-value": "0.0"
+        }
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "div": "An octahedron has 12 faces.",
+      "qti-choice-interaction": {
+        "response-identifier": "RESPONSE",
+        "shuffle": "false",
+        "max-choices": "1",
+        "qti-prompt": " ",
+        "qti-simple-choice": [
+          {
+            "_": "True",
+            "identifier": "ChoiceA",
+            "qti-feedback-inline": {
+              "_": "No, an octahedron has 8 faces.",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "ChoiceA"
+            }
+          },
+          {
+            "_": "False",
+            "identifier": "ChoiceB",
+            "qti-feedback-inline": {
+              "_": "That's right, an octahedron has 8 faces.",
+              "outcome-identifier": "FEEDBACK",
+              "show-hide": "show",
+              "identifier": "ChoiceB"
+            }
+          }
+        ]
+      }
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-match": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            },
+            "qti-correct": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "1",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0",
+              "base-type": "float"
+            }
+          }
+        }
+      },
+      "qti-set-outcome-value": {
+        "identifier": "FEEDBACK",
+        "qti-variable": {
+          "identifier": "RESPONSE"
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.736Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.736Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d0a"
+  },
+  "identifier": "upload-file",
+  "title": "Upload a file",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "upload-file",
+    "title": "Upload a file",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "single",
+      "base-type": "file"
+    },
+    "qti-outcome-declaration": {
+      "identifier": "SCORE",
+      "cardinality": "single",
+      "base-type": "float",
+      "normal-maximum": "20.0"
+    },
+    "qti-item-body": {
+      "p": "Upload a file here:",
+      "qti-upload-interaction": {
+        "response-identifier": "RESPONSE",
+        "qti-prompt": "Enter the filename"
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.736Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.736Z"
+  }
+},{
+  "_id": {
+    "$oid": "679a66e8ceb52e103feb4d0b"
+  },
+  "identifier": "hotspot-maximum",
+  "title": "Local Maximum",
+  "type": "qti-assessment-item",
+  "content": {
+    "xmlns": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation": "http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd",
+    "identifier": "hotspot-maximum",
+    "title": "Local Maximum",
+    "adaptive": "false",
+    "time-dependent": "false",
+    "qti-response-declaration": {
+      "identifier": "RESPONSE",
+      "cardinality": "single",
+      "base-type": "point",
+      "qti-correct-response": {
+        "qti-value": "216 90"
+      },
+      "qti-area-mapping": {
+        "default-value": "0",
+        "qti-area-map-entry": {
+          "shape": "rect",
+          "coords": "184,78,244,112",
+          "mapped-value": "1.0"
+        }
+      }
+    },
+    "qti-outcome-declaration": [
+      {
+        "identifier": "SCORE",
+        "cardinality": "single",
+        "base-type": "float",
+        "normal-maximum": "1.0"
+      },
+      {
+        "identifier": "FEEDBACK",
+        "cardinality": "single",
+        "base-type": "identifier"
+      }
+    ],
+    "qti-item-body": {
+      "qti-select-point-interaction": {
+        "response-identifier": "RESPONSE",
+        "max-choices": "1",
+        "qti-prompt": "Identify the local maximum on the graph:",
+        "object": {
+          "_": "Graph of cubic",
+          "type": "image/png",
+          "width": "627",
+          "height": "511",
+          "data": "images/cubic_xpw3d6m2xp3.png"
+        }
+      },
+      "qti-feedback-block": [
+        {
+          "outcome-identifier": "FEEDBACK",
+          "show-hide": "show",
+          "identifier": "Correct",
+          "qti-content-body": {
+            "p": "That's right."
+          }
+        },
+        {
+          "outcome-identifier": "FEEDBACK",
+          "show-hide": "show",
+          "identifier": "Incorrect",
+          "qti-content-body": {
+            "p": "No, that's not the local maximum."
+          }
+        }
+      ]
+    },
+    "qti-response-processing": {
+      "qti-response-condition": {
+        "qti-response-if": {
+          "qti-is-null": {
+            "qti-variable": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-base-value": {
+              "_": "0.0",
+              "base-type": "float"
+            }
+          }
+        },
+        "qti-response-else": {
+          "qti-set-outcome-value": {
+            "identifier": "SCORE",
+            "qti-map-response-point": {
+              "identifier": "RESPONSE"
+            }
+          },
+          "qti-response-condition": {
+            "qti-response-if": {
+              "qti-inside": {
+                "shape": "rect",
+                "coords": "184,78,244,112",
+                "qti-variable": {
+                  "identifier": "RESPONSE"
+                }
+              },
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "Correct",
+                  "base-type": "identifier"
+                }
+              }
+            },
+            "qti-response-else": {
+              "qti-set-outcome-value": {
+                "identifier": "FEEDBACK",
+                "qti-base-value": {
+                  "_": "Incorrect",
+                  "base-type": "identifier"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": {
+    "$date": "2025-01-29T17:35:36.736Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T17:35:36.736Z"
+  }
+}]
