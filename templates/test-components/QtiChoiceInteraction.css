@@ -1,0 +1,124 @@
+.qti-choice-interaction {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.qti-choice-wrapper {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.qti-choice-label {
+  display: inline-block;
+  position: relative;
+  padding: 0.25rem 0.25rem 0.25rem 2.10rem;
+  outline: none;
+  border-top: 1px dashed transparent;
+  border-bottom: 1px dashed transparent;
+  border-left: 3px solid transparent;
+  border-right: 1px dashed transparent;
+  -webkit-column-break-inside: avoid;
+  cursor: pointer;
+}
+
+.qti-choice-content {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Orientation styles */
+.qti-orientation-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.qti-orientation-horizontal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Radio and Checkbox styles */
+.qti-choice-label input[type="radio"],
+.qti-choice-label input[type="checkbox"] {
+  position: absolute;
+  top: 50%;
+  left: 0.95rem;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+.qti-choice-label input[type="radio"]::before,
+.qti-choice-label input[type="checkbox"]::before,
+.qti-choice-label input[type="radio"]::after,
+.qti-choice-label input[type="checkbox"]::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: '';
+}
+
+/* Vertical writing mode specific styles */
+.qti-orientation-vertical .qti-choice-label {
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-left: 1px dashed transparent;
+  border-top: 3px solid transparent;
+}
+
+/* Focus and hover states */
+.qti-choice-wrapper:focus-within .qti-choice-label {
+  border-color: var(--choice-control-focus-border);
+  box-shadow: var(--choice-control-focus-shadow);
+}
+
+.qti-choice-wrapper:hover .qti-choice-label {
+  background-color: var(--choice-hover-bg);
+}
+
+/* Disabled state */
+.qti-choice-label input:disabled + .qti-choice-content {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Stacking classes for horizontal layout */
+.qti-orientation-horizontal.qti-choices-stacking-2 .qti-choice-wrapper {
+  width: calc(50% - 0.5rem);
+}
+
+.qti-orientation-horizontal.qti-choices-stacking-3 .qti-choice-wrapper {
+  width: calc(33.33% - 0.67rem);
+}
+
+.qti-orientation-horizontal.qti-choices-stacking-4 .qti-choice-wrapper {
+  width: calc(25% - 0.75rem);
+}
+
+.qti-orientation-horizontal.qti-choices-stacking-5 .qti-choice-wrapper {
+  width: calc(20% - 0.8rem);
+}
+
+/* Vertical writing mode stacking */
+.qti-orientation-vertical.qti-choices-stacking-2 .qti-choice-wrapper {
+  height: calc(50% - 0.5rem);
+}
+
+.qti-orientation-vertical.qti-choices-stacking-3 .qti-choice-wrapper {
+  height: calc(33.33% - 0.67rem);
+}
+
+.qti-orientation-vertical.qti-choices-stacking-4 .qti-choice-wrapper {
+  height: calc(25% - 0.75rem);
+}
+
+.qti-orientation-vertical.qti-choices-stacking-5 .qti-choice-wrapper {
+  height: calc(20% - 0.8rem);
+}

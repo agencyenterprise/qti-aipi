@@ -1,0 +1,176 @@
+.qti-inline-choice-interaction,
+.inline-choice-wrapper {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  min-height: calc(1.6rem + .35rem);
+  line-height: 1.6rem;
+  margin-top: -1px;
+}
+
+.qti-orientation-vertical {
+  margin-top: .2rem;
+  margin-bottom: .2rem;
+  margin-right: -0.1rem;
+  vertical-align: top;
+  padding-right: 0.05rem;
+}
+
+.qti-orientation-vertical .inline-choice-wrapper {
+  margin: 0;
+}
+
+.inline-choice-select {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 0.15rem;
+  min-height: calc(1.6rem + .35rem);
+  padding: 0 1.5rem 0 .3rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  color: var(--foreground);
+  width: 9rem;
+  vertical-align: inherit;
+  background: var(--background) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3e%3cpath fill='%23fff' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3e") no-repeat right .4rem center/8px 10px;
+  border-width: 1px;
+  border-color: var(--choice-control-focus-border);
+  appearance: none;
+  border-radius: .25rem;
+  transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  cursor: pointer;
+}
+
+.inline-choice-select-label {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 0.15rem;
+  min-height: calc(1.6rem + .35rem);
+  padding: .15rem .3rem 0 .3rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  color: var(--foreground);
+  width: 9rem;
+  vertical-align: inherit;
+  border: 1px solid var(--choice-control-focus-border);
+  border-radius: .25rem;
+  transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  cursor: default;
+}
+
+.qti-hidden {
+  display: none;
+}
+
+.inline-choice-select-prompt {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 7.5rem;
+  vertical-align: inherit;
+  overflow: hidden !important;
+}
+
+.inline-choice-select:focus,
+.inline-choice-select[aria-expanded="true"],
+.inline-choice-select-label:focus {
+  color: var(--foreground);
+  background-color: var(--background);
+  border-color: var(--choice-control-focus-border);
+  outline: 0;
+  box-shadow: var(--choice-control-focus-shadow);
+}
+
+.inline-choice-select-listbox {
+  max-height: 10em;
+  overflow-y: auto;
+  position: absolute;
+  margin: 0 2px;
+  padding: 0;
+  background: var(--background);
+  border: 2px solid var(--foreground);
+  border-radius: .25em;
+  z-index: 9;
+}
+
+.inline-choice-select-listbox-hidden {
+  display: none;
+}
+
+.inline-choice-select-listbox [role="option"] {
+  display: block;
+  padding: 0 1em 0 1.5em;
+  position: relative;
+  line-height: 1.6em;
+  cursor: pointer;
+}
+
+.inline-choice-select-listbox [role="option"]:last-child {
+  padding-bottom: 2px;
+}
+
+.inline-choice-select-listbox [role="option"].focused {
+  color: var(--ic-focus-fc);
+  background: var(--ic-focus-bc);
+}
+
+.inline-choice-select-listbox [role="option"][aria-selected="true"]::before {
+  content: '✓';
+  position: absolute;
+  left: 0.5em;
+}
+
+.inline-choice-select-listbox [role="option"]:hover {
+  color: var(--ic-focus-fc);
+  background: var(--ic-focus-bc);
+}
+
+/* Width classes */
+.qti-input-width-1 .inline-choice-select {
+  width: 2.5rem;
+}
+
+.qti-input-width-1 .inline-choice-select-label {
+  width: 1.55rem;
+}
+
+.qti-input-width-1 .inline-choice-select-prompt {
+  width: 1.0rem;
+}
+
+/* ... Add other width classes as needed ... */
+
+/* Vertical orientation specific styles */
+.qti-orientation-vertical .inline-choice-select {
+  text-align: left;
+  vertical-align: middle;
+  padding: .25rem .15rem 0 0;
+  margin-left: 0;
+  margin-right: -0.05rem;
+  height: 9.75rem;
+  width: 1.95rem;
+  background: var(--background) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='5' height='4'%3e%3cpath fill='%23fff' transform='rotate(90 2.5 2.5)' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3e") no-repeat bottom .3rem center/10px 8px;
+}
+
+.qti-orientation-vertical .inline-choice-select-prompt {
+  writing-mode: vertical-rl;
+  height: 8.9rem;
+  width: 1.68rem;
+}
+
+.qti-orientation-vertical [role="option"] {
+  padding: 1.5em .25em 0 .25em;
+}
+
+.qti-orientation-vertical [role="option"][aria-selected="true"]::before {
+  top: 0.25em;
+  right: 0.2em;
+}

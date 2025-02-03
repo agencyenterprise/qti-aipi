@@ -1,0 +1,95 @@
+input.text-entry-default {
+    margin: 0;
+    vertical-align:inherit;
+    padding: 0 .3rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    height: calc(1.5em + .35rem);
+    color: var(--foreground);
+    width: 8.6rem;
+    background-color: var(--background);
+    background-clip: padding-box;
+    border: 1px solid var(--choice-control-focus-border);
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+
+  input.text-entry-default::placeholder {
+    color: var(--foreground);
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  .text-entry-default-label {
+    text-align: inherit;
+    overflow-wrap: break-word;
+    margin: 0 0.15rem;
+    padding: 0.3rem .3rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    color: var(--foreground);
+    vertical-align: inherit;
+    border: 1px solid var(--choice-control-focus-border);
+    border-radius: .25rem;
+    transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    cursor: default;
+  }
+
+  input.text-entry-default:focus,
+  .text-entry-default-label:focus {
+    color: var(--foreground);
+    background-color: var(--background);
+    border-color: var(--choice-control-focus-border);
+    outline: 0;
+    box-shadow: var(--choice-control-focus-shadow);
+  }
+
+  .qti-text-entry-interaction.qti-align-center input {
+    text-align: center;
+  }
+
+  .qti-text-entry-interaction.qti-align-left input {
+    text-align: left;
+  }
+
+  .qti-text-entry-interaction.qti-align-right input {
+    text-align: right;
+  }
+
+  .qti-text-entry-interaction {
+    display: inline-block;
+  }
+
+  .text-entry-default {
+    box-sizing: border-box;
+  }
+
+  /* Full width styling */
+  .qti-input-width-72 {
+    display: block;
+    width: 100%;
+  }
+
+  .qti-input-width-72 .text-entry-default {
+    width: 100%;
+  }
+
+  /* Other width classes */
+  .qti-input-width-1 .text-entry-default { width: 2em; }
+  .qti-input-width-2 .text-entry-default { width: 3em; }
+  .qti-input-width-3 .text-entry-default { width: 4em; }
+  .qti-input-width-4 .text-entry-default { width: 5em; }
+  .qti-input-width-5 .text-entry-default { width: 6em; }
+  .qti-input-width-6 .text-entry-default { width: 7em; }
+  .qti-input-width-10 .text-entry-default { width: 11em; }
+  .qti-input-width-15 .text-entry-default { width: 16em; }
+  .qti-input-width-20 .text-entry-default { width: 21em; }
+  .qti-input-width-25 .text-entry-default { width: 26em; }
+  .qti-input-width-30 .text-entry-default { width: 31em; }
+  .qti-input-width-35 .text-entry-default { width: 36em; }
+  .qti-input-width-40 .text-entry-default { width: 41em; }
+  .qti-input-width-45 .text-entry-default { width: 46em; }
+  .qti-input-width-50 .text-entry-default { width: 51em; }

@@ -1,0 +1,109 @@
+.quill-editor {
+    position: relative;
+}
+
+.ext-text-xhtml-default-label {
+    line-height: 1.6rem;
+    height: 98%;
+    margin: auto .25rem;
+    outline: none;
+    overflow-x: auto;
+    padding: .5rem;
+    color: var(--foreground);
+    background-color: var(--background);
+    border: 1px solid var(--choice-control-focus-border);
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    text-align: left;
+    word-wrap: anywhere;
+    overflow-wrap: anywhere;
+    white-space: break-spaces;
+    cursor: default;
+}
+
+.ext-text-editor-counter {
+    position: absolute;
+    right: 0;
+    bottom: -1.5rem;
+    font-size: .875rem;
+    color: var(--foreground);
+}
+
+.qti-hidden {
+    display: none;
+}
+
+/* TinyMCE wrapper styles */
+.editor :global(.tox-tinymce) {
+    border: 1px solid var(--choice-control-focus-border) !important;
+    border-radius: 0.25rem !important;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.editor :global(.tox-tinymce:focus-within) {
+    border-color: var(--choice-control-focus-border) !important;
+    outline: 0;
+    box-shadow: var(--choice-control-focus-shadow);
+}
+
+.editor :global(.tox-toolbar) {
+    background: none !important;
+    border-bottom: 1px solid var(--choice-control-focus-border) !important;
+}
+
+.editor :global(.tox-toolbar__group) {
+    border: none !important;
+}
+
+.editor :global(.tox-toolbar__primary) {
+    background: none !important;
+}
+
+.editor :global(.tox-editor-container) {
+    background: var(--background) !important;
+}
+
+.editor :global(.tox .tox-edit-area__iframe) {
+    background: var(--background) !important;
+}
+
+.editor :global(.tox .tox-tbtn) {
+    color: var(--foreground) !important;
+}
+
+.editor :global(.tox .tox-tbtn svg) {
+    fill: var(--foreground) !important;
+}
+
+.editor :global(.tox .tox-tbtn:hover) {
+    background: var(--choice-control-focus-border) !important;
+}
+
+.ext-text-xhtml-default-label {
+  margin: .25rem auto;
+  vertical-align:inherit;
+  padding: .3rem .5rem;
+  color: var(--foreground);
+  width: 100%;
+  background-color: var(--background);
+  border: 1px solid var(--choice-control-focus-border);
+  appearance: none;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-y: auto;
+  cursor: default;
+}
+
+.ext-text-xhtml-default-label:focus {
+  color: var(--foreground);
+  background-color: var(--background);
+  border-color: var(--choice-control-focus-border);
+  outline: 0;
+  box-shadow: var(--choice-control-focus-shadow);
+}
+
+.ext-text-xhtml-default-label p {
+  margin-bottom: .1rem;
+}

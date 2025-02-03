@@ -1,0 +1,142 @@
+div.qti-text-entry-interaction.qti-orientation-vertical {
+  display: inline-block;
+  position: relative;
+  margin-top: .2rem;
+  margin-bottom: .2rem;
+  margin-right: -0.1rem;
+  /* very important to get these lined up vertically */
+  vertical-align: top;
+  min-height: calc(1.6rem);
+  line-height: 1.6rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding-right: 0.05rem;
+}
+
+div.text-entry-default-vert-wrapper {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  min-height: calc(1.6rem);
+  line-height: 1.6rem;
+  border: 1px solid;
+  border-color: var(--choice-control-focus-border);
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+div.text-entry-default-vert-wrapper.focused {
+  border-color: var(--choice-control-focus-border);
+  box-shadow: var(--choice-control-focus-shadow);
+}
+
+.text-entry-default-vert,
+.text-entry-default-vert-label {
+  display: inline-block;
+  position: relative;
+  margin-top: 0.25rem;
+  padding-right: .125rem;
+  vertical-align: top;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  width: calc(1.6rem + .2rem);
+  height: 8.25rem;
+  color: var(--foreground);
+  background-color: var(--background);
+  -webkit-user-modify: read-write-plaintext-only;
+}
+
+.text-entry-default-vert-label {
+  -webkit-user-modify: unset;
+  cursor: default;
+}
+
+.text-entry-default-vert:focus,
+.text-entry-default-vert-label:focus {
+  color: var(--foreground);
+  background-color: var(--background);
+  outline: 0;
+}
+
+.text-entry-default-vert[contenteditable='true'] {
+  caret-color: var(--foreground);
+}
+
+.text-entry-default-vert-ph {
+  display: inline-block;
+  position: absolute;
+  top: .5rem;
+  right: .25rem;
+  height: 8.25rem;
+  width: calc(1.6rem);
+  color: var(--foreground);
+  background: transparent;
+  opacity: 0.6;
+  font-style: italic;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.text-entry-ph-hidden {
+  display: none;
+}
+
+.qti-input-width-1 .text-entry-default-vert,
+.qti-input-width-1 .text-entry-default-vert-ph,
+.qti-input-width-1 .text-entry-default-vert-label {
+  height: 1.25rem;
+}
+
+.qti-input-width-2 .text-entry-default-vert,
+.qti-input-width-2 .text-entry-default-vert-ph,
+.qti-input-width-2 .text-entry-default-vert-label  {
+  height: 2.25rem;
+}
+
+.qti-input-width-3 .text-entry-default-vert,
+.qti-input-width-3 .text-entry-default-vert-ph,
+.qti-input-width-3 .text-entry-default-vert-label {
+  height: 3.25rem;
+}
+
+.qti-input-width-4 .text-entry-default-vert,
+.qti-input-width-4 .text-entry-default-vert-ph,
+.qti-input-width-4 .text-entry-default-vert-label {
+  height: 4.25rem;
+}
+.qti-input-width-5 .text-entry-default-vert,
+.qti-input-width-5 .text-entry-default-vert-ph,
+.qti-input-width-5 .text-entry-default-vert-label {
+  height: 5.25rem;
+}
+
+.qti-input-width-6 .text-entry-default-vert,
+.qti-input-width-6 .text-entry-default-vert-ph,
+.qti-input-width-6 .text-entry-default-vert-label {
+  height: 6.25rem;
+}
+
+.qti-input-width-10 .text-entry-default-vert,
+.qti-input-width-10 .text-entry-default-vert-ph,
+.qti-input-width-10 .text-entry-default-vert-label {
+  height: 10.25rem;
+}
+
+.qti-input-width-15 .text-entry-default-vert,
+.qti-input-width-15 .text-entry-default-vert-ph,
+.qti-input-width-15 .text-entry-default-vert-label {
+  height: 15.25rem;
+}
+
+.qti-input-width-20 .text-entry-default-vert,
+.qti-input-width-20 .text-entry-default-vert-ph,
+.qti-input-width-20 .text-entry-default-vert-label {
+  height: 20.25rem;
+}
+
+.qti-input-width-25 .text-entry-default-vert,
+.qti-input-width-25 .text-entry-default-vert-ph,
+.qti-input-width-25 .text-entry-default-vert-label {
+  height: 25.25rem;
+}
