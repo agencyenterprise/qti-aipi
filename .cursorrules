@@ -11,6 +11,8 @@ This document describes the architecture of a QTI (Question and Test Interoperab
 
 ## API Endpoints
 
+/api-context holds context regarding the API, including the types and schemas and sample data for post/put requests.
+
 ### Assessment Items
 
 ```typescript
