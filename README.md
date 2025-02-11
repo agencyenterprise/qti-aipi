@@ -1,3 +1,5 @@
+# QTI Assessment Editor
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Important: AI Prompting System
@@ -13,29 +15,18 @@ The AI assistant is configured to understand:
 
 When interacting with the AI, you'll receive guidance, code snippets, and implementation details for building out your QTI editor application.
 
-## Getting Started
+## Development Guidelines
 
-First, open a terminal and run the following commands to install the dependencies:
+All development must occur within the `qti-aipi` folder. The project follows a hexagonal architecture pattern and strict TypeScript typing. Key points:
 
-```bash
-npm install
-```
+- Use TypeScript for all components
+- Follow QTI 3.0 specification strictly
+- Implement proper type checking
+- Include JSDoc documentation
+- Follow provided API endpoint patterns
+- Maintain unidirectional data flow
 
-Then, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## About The Application You'll Build
+## About The Application
 
 This is a Question & Test Interoperability (QTI) 3.0 Assessment Editor built with Next.js. The application's primary purpose is to provide a user-friendly interface for:
 
