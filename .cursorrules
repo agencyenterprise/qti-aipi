@@ -1,0 +1,222 @@
+# QTI API Architecture Guide
+
+This document describes the architecture of a QTI (Question and Test Interoperability) API that follows the QTI 3.0 specification. The API is built using Express.js and TypeScript, providing endpoints for managing assessment items, tests, sections, and curricula.
+
+## Core Concepts
+
+1. Assessment Items (Questions)
+2. Assessment Tests (Collections of questions)
+3. Sections (Groups of questions within a test)
+4. Curricula (Educational programs containing tests)
+
+## API Endpoints
+
+### Assessment Items
+
+```typescript
+// Create a new assessment item
+POST /api/assessment-items
+Body: {
+  type: QTIInteractionType;  // e.g., 'choice', 'text-entry', etc.
+  identifier?: string;       // Optional, auto-generated if not provided
+  title: string;
+  interaction: QTIInteraction;
+  responseDeclaration: QTIResponseDeclaration;
+}
+
+// Get all assessment items
+GET /api/assessment-items
+Query params: {
+  page?: number;    // Default: 1
+  limit?: number;   // Default: 10
+  search?: string;  // Search by title or identifier
+}
+
+// Get a specific assessment item
+GET /api/assessment-items/:identifier
+
+// Update an assessment item
+PUT /api/assessment-items/:identifier
+
+// Delete an assessment item
+DELETE /api/assessment-items/:identifier
+```
+
+### Assessment Tests
+
+```typescript
+// Create a new assessment test
+POST /api/assessment-tests
+Body: {
+  identifier?: string;
+  title: string;
+  'qti-test-part': [{
+    identifier: string;
+    navigationMode: 'linear' | 'nonlinear';
+    submissionMode: 'individual' | 'simultaneous';
+    'qti-assessment-section': QTISection[];
+  }]
+}
+
+// Get all assessment tests
+GET /api/assessment-tests
+
+// Get a specific assessment test
+GET /api/assessment-tests/:identifier
+
+// Update an assessment test
+PUT /api/assessment-tests/:identifier
+
+// Delete an assessment test
+DELETE /api/assessment-tests/:identifier
+```
+
+### Sections
+
+```typescript
+// Create a new section in an assessment test
+POST /api/assessment-tests/:assessmentTestId/sections
+Body: {
+  identifier: string;
+  title: string;
+  visible: boolean;
+  required?: boolean;
+  fixed?: boolean;
+  'keep-together'?: boolean;
+  'qti-assessment-item-ref'?: QTIItemRef[];
+}
+
+// Get all sections in an assessment test
+GET /api/assessment-tests/:assessmentTestId/sections
+
+// Get a specific section
+GET /api/assessment-tests/:assessmentTestId/sections/:identifier
+
+// Update a section
+PUT /api/assessment-tests/:assessmentTestId/sections/:identifier
+
+// Delete a section
+DELETE /api/assessment-tests/:assessmentTestId/sections/:identifier
+
+// Search sections
+GET /api/sections/search
+Query params: {
+  query?: { title?: string; identifier?: string };
+  assessmentTestId?: string;
+  parentId?: string;
+  page?: string;
+  limit?: string;
+  sort?: string;
+  order?: 'asc' | 'desc';
+}
+```
+
+### Curricula
+
+```typescript
+// Create a new curriculum
+POST /api/curricula
+Body: {
+  identifier: string;
+  title: string;
+  subject: string;
+  gradeLevel: string;
+  description?: string;
+  metadata?: Record<string, any>;
+}
+
+// Get all curricula
+GET /api/curricula
+
+// Get a specific curriculum
+GET /api/curricula/:identifier
+
+// Update a curriculum
+PUT /api/curricula/:identifier
+
+// Delete a curriculum
+DELETE /api/curricula/:identifier
+```
+
+## Data Structures
+
+### QTI Interaction Types
+
+```typescript
+type QTIInteractionType =
+  | "choice"
+  | "text-entry"
+  | "extended-text"
+  | "inline-choice"
+  | "match"
+  | "order"
+  | "associate"
+  | "select-point"
+  | "graphic-order"
+  | "graphic-associate"
+  | "graphic-gap-match"
+  | "hotspot"
+  | "slider"
+  | "drawing"
+  | "media"
+  | "custom"
+  | "upload";
+```
+
+### Response Format
+
+All successful responses follow this format:
+
+```typescript
+{
+  // For single item responses
+  ...itemData,
+  rawXml?: string,    // QTI 3.0 compliant XML
+  content?: any       // Parsed content structure
+}
+
+// For list responses
+{
+  items: T[],
+  total: number,
+  page: number,
+  pages: number
+}
+```
+
+### Error Format
+
+All error responses follow this format:
+
+```typescript
+{
+  error: string,
+  details?: string | object,
+  validation_errors?: Array<{
+    field: string,
+    message: string,
+    code: string
+  }>
+}
+```
+
+## Important Notes
+
+1. All endpoints require proper authentication (not shown in this guide)
+2. The API generates QTI 3.0 compliant XML for all assessment items and tests
+3. XML validation is performed against QTI 3.0 schema before saving
+4. All identifiers should be unique within their scope
+5. The API supports pagination for list endpoints
+6. Search functionality is case-insensitive
+7. File uploads (for media, drawings, etc.) should be handled separately
+
+## Best Practices for Frontend Development
+
+1. Always validate data on the frontend before sending to the API
+2. Handle pagination properly in the UI
+3. Implement proper error handling for all API responses
+4. Cache frequently accessed data when appropriate
+5. Use appropriate loading states during API calls
+6. Implement proper form validation matching the API's requirements
+7. Handle XML content appropriately when displaying or editing
+8. Consider implementing offline capabilities for assessment taking
