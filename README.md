@@ -1,58 +1,158 @@
-# QTI Assessment Editor
+# QTI Assessment Platform
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A modern web application for creating, managing, and organizing educational assessments following the QTI 3.0 specification. This project demonstrates the implementation of a teacher-focused assessment platform similar to Edulastic.
 
-## Important: AI Prompting System
+## Project Overview
 
-This repository serves as an AI prompting system that guides you in building a Next.js frontend application for QTI assessment editing. By following the prompting guidelines and providing clear requirements, you can interact with AI to help you develop the necessary components, features, and functionality.
+This platform provides educators with tools to:
 
-The AI assistant is configured to understand:
+- Create and manage QTI 3.0 compliant assessment items
+- Organize items into comprehensive tests
+- Manage curriculum-aligned content
+- Import/export QTI compatible content
 
-- QTI 3.0 specification requirements
-- Next.js frontend development patterns
-- CSV-based data persistence strategies
-- Component architecture and best practices
+### Core Features
 
-When interacting with the AI, you'll receive guidance, code snippets, and implementation details for building out your QTI editor application.
+1. **Assessment Item Management**
 
-## Development Guidelines
+   - Multiple interaction types (choice, text-entry, etc.)
+   - QTI 3.0 compliant structure
+   - Rich content editing
+   - Item bank organization
 
-All development must occur within the `qti-aipi` folder. The project follows a hexagonal architecture pattern and strict TypeScript typing. Key points:
+2. **Test Assembly**
+
+   - Section-based organization
+   - Linear/non-linear navigation
+   - Individual/simultaneous submission modes
+   - QTI test part management
+
+3. **Curriculum Integration**
+   - Subject-based organization
+   - Grade level alignment
+   - Educational standard mapping
+   - Content hierarchies
+
+## Technical Architecture
+
+### Frontend Stack
+
+- Next.js with TypeScript
+- Material-UI components
+- Formik for form management
+- Yup for validation
+- Zustand for state management
+
+### API Integration
+
+- RESTful endpoints
+- QTI 3.0 validation
+- XML generation/parsing
+- Error handling patterns
+
+## Development Patterns
+
+### Error Handling Strategy
+
+1. Attempt operation
+2. Detect failure
+3. Show error
+4. Provide recovery option
+
+### Data Flow
+
+- Unidirectional data flow
+- Type-safe interfaces
+- Validated state updates
+- Consistent error handling
+
+## Getting Started
+
+1. **Installation**
+
+   ```bash
+   npm install
+   ```
+
+2. **Development**
+
+   ```bash
+   npm run dev
+   ```
+
+3. **Building**
+   ```bash
+   npm run build
+   ```
+
+## Implementation Guidelines
+
+### Component Development
 
 - Use TypeScript for all components
-- Follow QTI 3.0 specification strictly
-- Implement proper type checking
-- Include JSDoc documentation
-- Follow provided API endpoint patterns
-- Maintain unidirectional data flow
+- Follow QTI 3.0 specification
+- Implement proper validation
+- Include error handling
+- Add loading states
+- Provide user feedback
 
-## About The Application
+### API Integration
 
-This is a Question & Test Interoperability (QTI) 3.0 Assessment Editor built with Next.js. The application's primary purpose is to provide a user-friendly interface for:
+- Connect to localhost:3000
+- Handle authentication
+- Manage requests/responses
+- Validate data structures
 
-- Uploading and importing existing QTI 3.0 compliant questions and tests
-- Creating and editing assessment questions through an intuitive interface
-- Organizing questions into tests and assessment sets
-- Saving work-in-progress and completed assessments
-- Exporting questions and tests in QTI 3.0 compliant format
+### QTI Compliance
 
-Key Features:
+- Follow 3.0 specification
+- Validate XML structure
+- Handle import/export
+- Maintain data integrity
 
-- **Question Management**: Upload, create, edit, and organize assessment test questions
-- **QTI Compliance**: Automatic validation against QTI 3.0 standards
+## Best Practices
 
-## Contributing
+1. **Form Handling**
 
-When contributing to this project, please ensure your changes comply with the QTI 3.0 specification. All new features should include appropriate validation and error handling.
+   - Client-side validation
+   - Server-side validation
+   - Error messaging
+   - State management
+
+2. **Data Management**
+
+   - Type safety
+   - State consistency
+   - Error recovery
+   - Loading states
+
+3. **User Experience**
+   - Clear feedback
+   - Error recovery
+   - Progress indication
+   - Intuitive navigation
 
 ## Documentation
 
 - [QTI 3.0 Specification](https://www.imsglobal.org/spec/qti/v3p0/impl)
+- [Project Structure](./api-context/schema.md)
+- [API Documentation](./api-context/qti.validation.md)
+
+## Contributing
+
+When contributing:
+
+1. Follow TypeScript patterns
+2. Maintain QTI 3.0 compliance
+3. Include error handling
+4. Add appropriate tests
+5. Update documentation
 
 ## Support
 
-For questions and support:
+For assistance:
 
-1. Check the documentation first
-2. Review existing issues
-3. Create a new issue with a clear description following the prompting guidelines above
+1. Review documentation
+2. Check existing issues
+3. Create detailed bug reports
+4. Follow error handling patterns
