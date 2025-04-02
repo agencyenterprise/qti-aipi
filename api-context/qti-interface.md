@@ -42,12 +42,12 @@ export interface QTIAssessmentItem {
   title: string;
   adaptive: boolean;
   timeDependent: boolean;
-  responses: QTIResponseDeclaration[];
+  responses: QTIResponseDeclarations[];
   outcomes: QTIOutcomeDeclaration[];
   itemBody: QTIItemBody;
 }
 
-export interface QTIResponseDeclaration {
+export interface QTIResponseDeclarations {
   identifier: string;
   cardinality: "single" | "multiple" | "ordered";
   baseType: string;

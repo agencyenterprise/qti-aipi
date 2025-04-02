@@ -59,7 +59,7 @@ const itemBodySchema = new mongoose.Schema({
   elements: [elementSchema],
 });
 
-const responseDeclarationSchema = new mongoose.Schema({
+const responseDeclarationsSchema = new mongoose.Schema({
   identifier: { type: String, required: true },
   cardinality: {
     type: String,
@@ -203,7 +203,7 @@ const qtiAssessmentItemSchema = new mongoose.Schema(
     timeDependent: { type: Boolean, default: false },
     adaptive: { type: Boolean, default: false },
     itemBody: itemBodySchema,
-    responseDeclarations: [responseDeclarationSchema],
+    responseDeclarations: [responseDeclarationsSchema],
     outcomeDeclarations: [outcomeDeclarationSchema],
     responseProcessing: mongoose.Schema.Types.Mixed,
     metadata: mongoose.Schema.Types.Mixed,

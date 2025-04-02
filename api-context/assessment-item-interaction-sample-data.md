@@ -24,7 +24,7 @@ export const createValidAssociateItemData = () => ({
       ],
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "multiple",
     baseType: "directedPair",
@@ -59,7 +59,7 @@ export async function createValidDrawingItemData() {
         },
       },
     },
-    responseDeclaration: {
+    responseDeclarations: {
       identifier: "RESPONSE",
       cardinality: "single",
       baseType: "file",
@@ -87,7 +87,7 @@ export const createValidExtendedTextItemData = () => ({
       patternMask: "[a-zA-Z0-9\\s\\p{P}]*",
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "single",
     baseType: "string",
@@ -147,7 +147,7 @@ export const createValidGraphicAssociateItemData = () => ({
       ],
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "multiple",
     baseType: "directedPair",
@@ -211,7 +211,7 @@ export const createValidGraphicGapMatchItemData = () => ({
       ],
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "multiple",
     baseType: "directedPair",
@@ -259,7 +259,7 @@ export const createValidGraphicOrderItemData = () => ({
       ],
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "ordered",
     baseType: "identifier",
@@ -305,7 +305,7 @@ export const createValidHotspotItemData = () => ({
       ],
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "multiple",
     baseType: "identifier",
@@ -332,7 +332,7 @@ export const createValidInlineChoiceItemData = () => ({
       ],
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "single",
     baseType: "identifier",
@@ -367,7 +367,7 @@ export const createValidMatchItemData = () => ({
       ],
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "multiple",
     baseType: "directedPair",
@@ -403,7 +403,7 @@ export const createValidMediaItemData = () => ({
       },
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "single",
     baseType: "string",
@@ -433,7 +433,7 @@ export const createValidOrderItemData = () => ({
       ],
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "ordered",
     baseType: "identifier",
@@ -462,7 +462,7 @@ export const createValidSelectPointItemData = () => ({
       },
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "multiple",
     baseType: "point",
@@ -493,7 +493,7 @@ export const createValidSliderItemData = () => ({
       },
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "single",
     baseType: "float",
@@ -520,7 +520,7 @@ export function createValidTextEntryItemData(overrides = {}) {
         prompt: "What is the capital of France?",
       },
     },
-    responseDeclaration: {
+    responseDeclarations: {
       identifier: "RESPONSE",
       cardinality: "single",
       baseType: "string",
@@ -546,7 +546,7 @@ export const createValidUploadItemData = () => ({
       maxFiles: 1,
     },
   },
-  responseDeclaration: {
+  responseDeclarations: {
     identifier: "RESPONSE",
     cardinality: "single",
     baseType: "string",
